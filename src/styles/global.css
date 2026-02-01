@@ -124,9 +124,12 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-poppins text-slate-300;
+    @apply bg-background font-poppins text-slate-300;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-josefin font-bold text-white;
+    @apply font-josefin font-medium text-slate-50/90 tracking-wide;
+  }
+  .link {
+    @apply text-teal-300/80 hover:text-teal-500/80 underline underline-offset-4 decoration-teal-600/30 hover:decoration-teal-500/50 transition-all duration-300 ease-in-out;
   }
 }

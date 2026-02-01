@@ -25,7 +25,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-center mt-32 pb-20 mb-20 max-w-3xl text-center"
+    class="flex flex-col items-center justify-center pt-2 mt-32 mb-20 max-w-3xl text-center"
 >
     <div class="flex gap-x-2">
         <!-- Seth image -->

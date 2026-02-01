@@ -14,7 +14,7 @@
 
 <header class="px-12 py-10 bg-slate-900/50 absolute w-full top-0 left-0 z-50">
     <nav class="flex items-center justify-between">
-        <a href="/" class="text-4xl font-medium text-white font-josefin"
+        <a href="/" class="text-4xl text-slate-50/90 font-josefin tracking-wide"
             >{name}</a
         >
         <div class="flex gap-8 text-xl">
@@ -22,8 +22,8 @@
                 <a
                     {href}
                     class="{isActive(href)
-                        ? 'text-teal-300 font-semibold'
-                        : ''} hover:text-teal-300">{label}</a
+                        ? 'text-teal-300/80 font-semibold'
+                        : ''} hover:text-teal-300/80">{label}</a
                 >
             {/each}
         </div>
