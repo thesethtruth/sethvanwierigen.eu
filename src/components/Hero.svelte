@@ -24,30 +24,34 @@
     ];
 </script>
 
-<div class="flex items-center justify-center mt-40 pb-20 mb-20">
-    <div class="grid grid-cols-2 gap-x-5 text-center max-w-4xl">
-        <div
-            class="h-48 w-48 ml-auto overflow-hidden rounded-full drop-shadow-lg"
-        >
+<div
+    class="flex flex-col items-center justify-center mt-32 pb-20 mb-20 max-w-3xl text-center"
+>
+    <div class="flex gap-x-2">
+        <!-- Seth image -->
+        <div class=" h-48 w-48 overflow-hidden rounded-full drop-shadow-lg">
             <img
                 src={Seth.src}
                 alt="Seth van Wieringen"
                 class="absolute w-full h-full object-cover"
             />
         </div>
+        <!-- Moving shadow -->
         <div
-            class="h-48 w-48 ml-auto rounded-full bg-teal-500/70 absolute"
+            class=" h-48 w-48 -z-10 rounded-full bg-teal-500/70 absolute -translate-x-2 -translate-y-1"
         ></div>
 
-        <div class="text-teal-100 my-auto space-y-0.5 text-4xl text-left">
+        <!-- Key skills -->
+        <div
+            class=" text-teal-100/80 my-auto space-y-0.5 text-4xl text-left w-fit"
+        >
             {#each heroItems as item}
                 <HeroItem title={item.title} target={item.target} />
             {/each}
         </div>
-
-        <div class="col-span-2">
-            <HeroAbout />
-            <HeroSocials />
-        </div>
+    </div>
+    <div class="">
+        <HeroAbout />
+        <HeroSocials />
     </div>
 </div>
