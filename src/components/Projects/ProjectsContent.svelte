@@ -4,7 +4,7 @@
     const consultingProjects = [
         {
             title: "Scenario Study Nuclear Energy",
-            role: "Lead Modeller",
+            role: "Lead modeller",
             description:
                 "National policy study for the Ministry of Climate exploring the role of nuclear energy in the Dutch energy system. Built and applied optimisation frameworks to evaluate long-term scenarios.",
             tags: ["policy", "energy", "PyPSA", "optimisation", "nuclear"],
@@ -12,26 +12,38 @@
         },
         {
             title: "CO2-free Electricity System 2035",
-            role: "Lead Modeller",
+            role: "Lead modeller",
             description:
                 "Study for the National Program Energy exploring pathways to a fully CO2-free electricity system by 2035. Modelled technology mixes, grid impacts, and cost implications.",
-            tags: ["policy", "energy", "PyPSA", "renewables", "grid"],
+            tags: [
+                "policy",
+                "energy",
+                "PyPSA",
+                "optimisation",
+                "market design",
+            ],
             period: "2024",
         },
         {
             title: "pMIEK Infrastructure Prioritisation",
-            role: "Lead Modeller",
+            role: "Architect and lead developer",
             description:
                 "Infrastructure prioritisation study for the province of Zuid-Holland. Developed modelling frameworks to support investment decisions in energy infrastructure.",
-            tags: ["policy", "energy", "infrastructure", "optimisation"],
+            tags: [
+                "energy",
+                "infrastructure",
+                "decentral government",
+                "multi-level",
+                "ETM",
+            ],
             period: "2025",
         },
         {
             title: "NPE Meta-Study",
-            role: "Lead Modeller",
+            role: "Analyst",
             description:
                 "Meta-analysis for the National Program Energy synthesising findings across multiple energy scenario studies to inform national energy policy.",
-            tags: ["policy", "energy", "meta-analysis"],
+            tags: ["policy", "energy", "meta-study", "data analysis"],
             period: "2023",
         },
     ];
@@ -41,7 +53,7 @@
             title: "Energy System Optimisation Frameworks",
             role: "Developer & Architect",
             description:
-                "Built in-house optimisation frameworks for energy system modelling at Witteveen+Bos, enabling national-scale policy advice through PyPSA-based workflows.",
+                "Built in-house optimisation frameworks for energy system modelling at Witteveen+Bos, enabling national policy advice through proprietary PyPSA-based workflows.",
             tags: ["PyPSA", "Python", "optimisation", "energy"],
         },
         {
@@ -99,8 +111,7 @@
     <!-- Tooling & Development -->
     <section id="tooling" class="mb-16">
         <h2 class="text-3xl mb-8 flex items-center gap-3">
-            <span class="text-teal-500/80">&#47;&#47;</span> Tooling &
-            Development
+            <span class="text-teal-500/80">&#47;&#47;</span> Tooling & Development
         </h2>
         <div class="grid gap-5">
             {#each toolingProjects as project}
