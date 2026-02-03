@@ -43,20 +43,6 @@
             period: "2024",
             link: "https://www.rijksoverheid.nl/documenten/rapporten/2024/08/31/elektriciteitsmix-en-marktdynamiek-in-2035-co2-vrij-elektriciteitssysteem",
         },
-        {
-            title: "pMIEK Infrastructure Prioritisation",
-            role: "Architect and lead developer",
-            description:
-                "Infrastructure prioritisation study for the province of Zuid-Holland. Developed modelling frameworks to support investment decisions in energy infrastructure.",
-            tags: [
-                "energy",
-                "infrastructure",
-                "decentral government",
-                "multi-level",
-                "ETM",
-            ],
-            period: "2025",
-        },
     ];
 
     const toolingProjects = [
@@ -75,19 +61,28 @@
             tags: ["TypeScript", "Python", "full-stack", "data visualisation"],
         },
         {
-            title: "Cable Pooling Analysis Tool",
-            role: "Researcher & Developer",
+            title: "pMIEK Infrastructure Prioritisation (TIP)",
+            role: "Architect and lead developer",
             description:
-                "Research tool exploring optimal integration of solar and batteries with existing onshore wind under cost uncertainty. Published in Sustainable Energy, Grids and Networks.",
-            tags: ["PyPSA", "research", "renewables", "grid", "uncertainty"],
-            link: "https://doi.org/10.1016/j.segan.2025.101971",
+                "Infrastructure prioritisation study for the province of Zuid-Holland. Developed modelling frameworks to support investment decisions in energy infrastructure.",
+            tags: [
+                "energy",
+                "infrastructure",
+                "decentral government",
+                "multi-level",
+                "ETM",
+            ],
+            period: "2025",
+            link: "https://github.com/witteveenbos/TIP",
         },
         {
-            title: "Semi-Autonomous Energy Systems",
-            role: "Researcher & Developer",
+            title: "Semi-Autonomous Energy Systems (HOLON)",
+            role: "Architect & Developer",
             description:
                 "Research and model development using innovative data architectures and agent-based modelling for semi-autonomous energy systems.",
             tags: ["agent-based modelling", "Python", "research", "energy"],
+            link: "https://github.com/Zenmo/Holon-webapp",
+            period: "2021-2023",
         },
         {
             title: "W+B AI Adoption Program",
@@ -138,10 +133,8 @@
         </h2>
 
         <div class="mb-10">
-            <h3 class="text-lg text-slate-50/90 mb-4">Publication</h3>
-            <div
-                class="rounded-xl border border-slate-700/50 bg-slate-800/30 p-6"
-            >
+            <h3 class="text-xl text-slate-50/90 mb-4">Publication</h3>
+            <div>
                 <h3 class=" text-teal-300/80 font-bold text-xl">2025</h3>
                 <p class="text-slate-50/90 font-medium leading-relaxed">
                     Cable pooling to add renewables amid grid congestion:
@@ -163,7 +156,7 @@
             </div>
         </div>
 
-        <h3 class="text-lg text-slate-50/90 mb-4">Research interests</h3>
+        <h3 class="text-xl text-slate-50/90 mb-4">Research interests</h3>
         <ul class="space-y-3">
             {#each researchInterests as interest}
                 <li
