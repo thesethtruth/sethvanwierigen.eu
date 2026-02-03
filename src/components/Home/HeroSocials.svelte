@@ -7,7 +7,7 @@
     <!-- CV -->
     <Button
         size="icon-lg"
-        href="/Seth-van-Wieringen-CV.pdf"
+        href="/CV-SethvanWieringen.pdf"
         target="_blank"
         class="group hover:size-16 transition-all duration-600 ease-in-out"
     >
