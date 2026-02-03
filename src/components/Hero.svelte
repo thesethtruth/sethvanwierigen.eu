@@ -22,41 +22,6 @@
         //     target: "/projects#data-ai",
         // },
     ];
-
-    let mouseX = $state(0);
-    let mouseY = $state(0);
-    let windowWidth = $state(1);
-    let windowHeight = $state(1);
-
-    let centerX = $derived(windowWidth / 2);
-    let centerY = $derived(windowHeight / 2);
-    let offsetX = $derived((mouseX - centerX) / windowWidth);
-    let offsetY = $derived((mouseY - centerY) / windowHeight);
-
-    $effect(() => {
-        // Initialize after mount (window exists)
-        windowWidth = window.innerWidth;
-        windowHeight = window.innerHeight;
-
-        function handleMouseMove(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        }
-
-        function handleResize() {
-            windowWidth = window.innerWidth;
-            windowHeight = window.innerHeight;
-        }
-
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("resize", handleResize);
-
-        // Cleanup returned from $effect
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("resize", handleResize);
-        };
-    });
 </script>
 
 <div
@@ -71,11 +36,9 @@
                 class="absolute w-full h-full object-cover"
             />
         </div>
-        <!-- Moving shadow -->
+        <!-- Shadow -->
         <div
-            class="h-50 w-50 -z-10 rounded-full bg-teal-500/70 absolute"
-            style="transform: translate({-0.5 + offsetX}em, {-0.25 +
-                offsetY}em)"
+            class="h-48 w-48 -z-10 rounded-full bg-teal-500/70 absolute -translate-x-2 -translate-y-1"
         ></div>
 
         <!-- Key skills -->
