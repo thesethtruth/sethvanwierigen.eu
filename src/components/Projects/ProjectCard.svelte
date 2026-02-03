@@ -40,9 +40,7 @@
         <p class="text-slate-300 leading-relaxed">{description}</p>
         <div class="flex flex-wrap gap-2 mt-1">
             {#each tags as tag}
-                <Badge
-                    class="bg-teal-500/10 text-teal-300/80 border-teal-500/20 hover:bg-teal-500/20 text-xs"
-                >
+                <Badge variant="teal">
                     {tag}
                 </Badge>
             {/each}

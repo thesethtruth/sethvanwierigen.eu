@@ -98,8 +98,8 @@
 <div class="max-w-4xl mx-auto px-6 pt-36 pb-20">
     <h1 class="text-5xl mb-4">Projects</h1>
     <p class="text-slate-300 text-lg mb-16 max-w-2xl">
-        A selection of consulting studies and tools I've built — from national
-        energy policy advice to open-source model development.
+        A selection of studies I've worked on and tools I've built. I also teach
+        and conduct research from time to time.
     </p>
 
     <!-- Consulting -->
@@ -119,7 +119,7 @@
         <h2 class="text-3xl mb-8 flex items-center gap-3">
             <span class="text-teal-500/80">&#47;&#47;</span> Tooling & Development
         </h2>
-        <div class="grid gap-5">
+        <div class="grid gap-10">
             {#each toolingProjects as project}
                 <ProjectCard {...project} />
             {/each}

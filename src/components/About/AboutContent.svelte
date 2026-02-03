@@ -18,13 +18,28 @@
         },
         {
             label: "Programming",
-            skills: ["Python", "TypeScript", "JavaScript", "SQL", "Java"],
+            skills: [
+                "Python",
+                "TypeScript",
+                "JavaScript",
+                "SQL",
+                "Java",
+                "Svelte",
+                "Docker",
+                "Astro",
+                "VPS",
+                "Azure",
+                "Hetzner",
+                "GCP",
+            ],
         },
         {
             label: "Data & Visualisation",
             skills: [
-                "large dataset analysis",
+                "explorative data analysis",
                 "interactive dashboards",
+                "policy support tools",
+                "D3.js",
                 "Plotly",
                 "Matplotlib",
             ],
@@ -53,11 +68,28 @@
 
 <div class="max-w-4xl mx-auto px-6 pt-36 pb-20">
     <h1 class="text-5xl mb-4">About</h1>
-    <p class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed">
-        Energy systems modeller who builds tools that make complexity
-        accessible. I bring hands-on consulting experience with a drive to teach
-        and research. Physics teacher by qualification, coach by nature.
-    </p>
+    <div
+        class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed space-y-4"
+    >
+        <p>
+            Energy systems modeller who builds tools that make complexity
+            accessible. I bring hands-on consulting experience with a drive
+            better inform the energy transition with open-source models and
+            data.
+        </p>
+        <p>
+            My expertise lies in energy system modelling, data analysis, and
+            visualisation. I enjoy translating complex technical concepts into
+            clear insights for diverse audiences. I'm passionate about
+            open-source software and collaborative development. I believe
+            transparency and shared knowledge are key to solving the energy
+            challenges we face.
+        </p>
+        <p>
+            When I'm not modelling energy systems, you can find me riding bikes,
+            cooking and baking sourdough and being an awesome dad and husband.
+        </p>
+    </div>
 
     <!-- Skills -->
     <section class="mb-16">
@@ -67,16 +99,12 @@
         <div class="space-y-6">
             {#each skillGroups as group}
                 <div>
-                    <h3
-                        class="text-sm text-teal-300/60 uppercase tracking-wider mb-3"
-                    >
-                        {group.label}
+                    <h3 class="text text-slate-200/80 tracking-wider mb-1">
+                        > {group.label}
                     </h3>
                     <div class="flex flex-wrap gap-2">
                         {#each group.skills as skill}
-                            <Badge
-                                class="bg-teal-500/10 text-teal-300/80 border-teal-500/20 text-xs"
-                            >
+                            <Badge variant="teal">
                                 {skill}
                             </Badge>
                         {/each}
