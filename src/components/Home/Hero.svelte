@@ -1,5 +1,5 @@
 <script>
-    import Seth from "../assets/seth.jpg";
+    import Seth from "../../assets/seth.jpg";
     import HeroAbout from "./HeroAbout.svelte";
     import HeroItem from "./HeroItem.svelte";
     import HeroSocials from "./HeroSocials.svelte";
@@ -17,10 +17,6 @@
             title: "developer.",
             target: "/projects#tooling",
         },
-        // {
-        //     title: "data&ai",
-        //     target: "/projects#data-ai",
-        // },
     ];
 </script>
 
