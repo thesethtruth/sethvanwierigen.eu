@@ -13,7 +13,7 @@
     }
 
     const contactFields = [
-        { label: "Email", value: "seth@koda.energy" },
+        { label: "Email", value: "hi@sethvanwieringen.eu" },
         { label: "Phone", value: "+31 (0)6 57 10 44 96" },
         { label: "KvK", value: "99644398" },
         { label: "VAT ID", value: "NL223215260B01" },
