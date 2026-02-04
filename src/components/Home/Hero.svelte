@@ -21,7 +21,7 @@
 </script>
 
 <div
-    class="flex flex-col items-center justify-center pt-2 mt-32 mb-20 max-w-3xl text-center"
+    class="flex flex-col items-center justify-center pt-2 mt-32 mb-20 max-w-3xl text-center px-8"
 >
     <div class="flex gap-x-2">
         <!-- Seth image -->
@@ -39,7 +39,7 @@
 
         <!-- Key skills -->
         <div
-            class=" text-teal-100/80 my-auto space-y-0.5 text-4xl text-left w-fit"
+            class=" text-teal-100/80 my-auto space-y-0.5 text-4xl text-left w-fit hidden md:block"
         >
             {#each heroItems as item}
                 <HeroItem title={item.title} target={item.target} />
