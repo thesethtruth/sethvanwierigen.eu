@@ -25,7 +25,7 @@
             >Seth <span class="hidden md:inline">van Wieringen</span></a
         >
 
-        <div class="gap-8 text-xl hidden md:flex">
+        <div class="gap-8 text-xl hidden sm:flex">
             {#each links as { href, label }}
                 <a
                     {href}
@@ -36,9 +36,9 @@
             {/each}
         </div>
 
-        <div class="flex md:hidden items-center justify-center">
+        <div class="flex sm:hidden items-center justify-center">
             <button
-                onclick={!open ? toggleMenu : toggleMenu}
+                onclick={toggleMenu}
                 class="flex flex-col gap-1.5 justify-center items-center"
                 aria-label="Menu Button"
             >
@@ -48,9 +48,10 @@
             </button>
         </div>
         <div
-            class="absolute top-full left-0 w-full bg-slate-900/95 flex flex-col items-center gap-6 py-6 md:hidden transition-all duration-300 ease-in-out overflow-hidden z-10 text-2xl"
-            class:!min-h-screen={open}
-            class:!-translate-y-96={!open}
+            class="absolute top-full left-0 w-full bg-slate-900/95 flex flex-col items-center gap-6 py-6 sm:hidden transition-all duration-600 ease-in-out overflow-hidden -z-1 text-2xl"
+            class:min-h-screen={open}
+            class:-translate-y-96={!open}
+            class:pointer-events-none={!open}
         >
             {#each links as { href, label }}
                 <a
