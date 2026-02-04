@@ -17,8 +17,8 @@
         { label: "Phone", value: "+31 (0)6 57 10 44 96" },
         { label: "KvK", value: "99644398" },
         { label: "VAT ID", value: "NL223215260B01" },
-        { label: "IBAN", value: "t.b.a." },
-        { label: "BIC", value: "t.b.a." },
+        { label: "IBAN", value: "NL 13 KNAB 0780938135" },
+        { label: "BIC", value: "KNAB NL 2H" },
     ];
 
     const skillGroups = [
