@@ -21,12 +21,13 @@
                         <a
                             href={link}
                             target="_blank"
-                            class="link flex flex-row items-center gap-2"
-                            >{title}<ExternalLink
-                                size="20"
-                                class="h-fit w-fit"
-                            /></a
+                            class="link text-slate-200/90 hover:text-teal-300/80"
                         >
+                            <ExternalLink
+                                size="20"
+                                class="inline align-baseline mr-1 text-teal-300/80"
+                            />{title}
+                        </a>
                     {:else}
                         {title}
                     {/if}

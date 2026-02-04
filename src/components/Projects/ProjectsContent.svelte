@@ -212,7 +212,7 @@
             >
                 Certification
             </Badge>
-            <span class="text-slate-400 text-sm"
+            <span class="text-slate-400 text-xs md:text-sm"
                 >Physics Teaching Qualification (Tweedegraads
                 Onderwijsbevoegdheid) - University of Twente, 2018</span
             >
