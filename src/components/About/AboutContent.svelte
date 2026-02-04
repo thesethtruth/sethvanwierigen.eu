@@ -88,13 +88,13 @@
 <div class="max-w-4xl mx-auto px-6 pt-36 pb-20">
     <h1 class="text-5xl mb-4">About</h1>
     <div
-        class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed space-y-4"
+        class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed space-y-6"
     >
         <p>
             Energy systems modeller who builds tools that make complexity
-            accessible. I bring hands-on consulting experience with a drive
-            better inform the energy transition with open-source models and
-            data.
+            accessible. I bring hands-on consulting experience with the drive to
+            better inform energy planners and policy makers in the energy
+            transition with open-source models and data.
         </p>
         <p>
             My expertise lies in energy system modelling, data analysis, and
@@ -108,10 +108,32 @@
             When I'm not modelling energy systems, you can find me riding bikes,
             cooking and baking sourdough and being an awesome dad and husband.
         </p>
+        <h2 class="text-3xl">Full-stack problem solver</h2>
+        <p>
+            I like to make things that work and make impact. Over the years I've
+            always seen challenges as opportunities to learn new <a
+                href="/about#skills"
+                class="link">skills</a
+            > which made me a versatile generalist. From data engineering, backend
+            development, product engineering to stakeholder management and process
+            design. I enjoy working on all layers of a problem to deliver end-to-end
+            solutions that create value.
+        </p>
+
+        <h2 class="text-3xl" id="independent">Independent consultant</h2>
+        I'm always open to discuss potential collaborations, consulting projects
+        or job opportunities in the energy transition space. Combining energy, models/data/apps
+        and consulting is what I do best, but I'm also open to other opportunities
+        where I can add value. Feel free to&#32<a
+            href="/about#contact"
+            class="link"
+        >
+            reach out</a
+        > if you think we could be a good match!
     </div>
 
     <!-- Skills -->
-    <section class="mb-16">
+    <section class="mb-16" id="skills">
         <h2 class="text-3xl mb-8 flex items-center gap-3">
             <span class="text-teal-500/80">&#47;&#47;</span> Skills
         </h2>
@@ -155,7 +177,7 @@
     </section>
 
     <!-- Contact information -->
-    <section class="mb-16">
+    <section class="mb-16" id="contact">
         <h2 class="text-3xl mb-8 flex items-center gap-3">
             <span class="text-teal-500/80">&#47;&#47;</span> Contact information
         </h2>
