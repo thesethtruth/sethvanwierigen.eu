@@ -1,6 +1,25 @@
 <script lang="ts">
     import Badge from "$lib/components/ui/badge/badge.svelte";
+    import * as Popover from "$lib/components/ui/popover";
+    import { Copy } from "@lucide/svelte";
     import Affiliation from "./Affiliation.svelte";
+
+    let copiedField = $state("");
+
+    async function copy(value: string, field: string) {
+        await navigator.clipboard.writeText(value);
+        copiedField = field;
+        setTimeout(() => (copiedField = ""), 1500);
+    }
+
+    const contactFields = [
+        { label: "Email", value: "seth@koda.energy" },
+        { label: "Phone", value: "+31 (0)6 57 10 44 96" },
+        { label: "KvK", value: "99644398" },
+        { label: "VAT ID", value: "NL223215260B01" },
+        { label: "IBAN", value: "t.b.a." },
+        { label: "BIC", value: "t.b.a." },
+    ];
 
     const skillGroups = [
         {
@@ -133,5 +152,45 @@
             link="https://www.utwente.nl/en/education/"
             description="teaching energy system modelling as part of the Energy System Integration course"
         />
+    </section>
+
+    <!-- Contact information -->
+    <section class="mb-16">
+        <h2 class="text-3xl mb-8 flex items-center gap-3">
+            <span class="text-teal-500/80">&#47;&#47;</span> Contact information
+        </h2>
+        <div
+            class="grid grid-cols-[auto_1fr] gap-x-8 gap-y-3 text-lg items-center"
+        >
+            {#each contactFields as { label, value }}
+                <span class="text-slate-400">{label}</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-slate-200">{value}</span>
+                    {#if value !== "t.b.a."}
+                        <Popover.Root
+                            bind:open={
+                                () => copiedField === label,
+                                (v) => {
+                                    if (!v) copiedField = "";
+                                }
+                            }
+                        >
+                            <Popover.Trigger
+                                onclick={() => copy(value, label)}
+                                class="text-slate-400 hover:text-teal-300/80 transition-colors cursor-pointer"
+                            >
+                                <Copy size={16} />
+                            </Popover.Trigger>
+                            <Popover.Content
+                                class="w-auto px-3 py-1.5 text-sm"
+                                side="right"
+                            >
+                                Copied!
+                            </Popover.Content>
+                        </Popover.Root>
+                    {/if}
+                </div>
+            {/each}
+        </div>
     </section>
 </div>
