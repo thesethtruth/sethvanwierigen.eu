@@ -120,8 +120,14 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
   * {
     @apply border-border outline-ring/50;
+  }
+  [id] {
+    scroll-margin-top: 5rem;
   }
   body {
     @apply bg-background font-poppins text-slate-300;

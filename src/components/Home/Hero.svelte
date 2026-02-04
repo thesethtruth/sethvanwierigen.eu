@@ -11,7 +11,7 @@
         },
         {
             title: "energy nerd.",
-            target: "/about",
+            target: "/projects#research-teaching",
         },
         {
             title: "developer.",

@@ -103,8 +103,8 @@
     </p>
 
     <!-- Consulting -->
-    <section id="consulting" class="mb-16">
-        <h2 class="text-3xl mb-8 flex items-center gap-3">
+    <section class="mb-16">
+        <h2 class="text-3xl mb-8 flex items-center gap-3" id="consulting">
             <span class="text-teal-500/80">&#47;&#47;</span> Consulting
         </h2>
         <div class="grid gap-10">
@@ -127,7 +127,7 @@
     </section>
 
     <!-- Research and teaching -->
-    <section class="mb-16">
+    <section class="mb-16" id="research-teaching">
         <h2 class="text-3xl mb-8 flex items-center gap-3">
             <span class="text-teal-500/80">&#47;&#47;</span> Research
         </h2>

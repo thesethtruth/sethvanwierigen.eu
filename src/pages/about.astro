@@ -17,5 +17,18 @@ import "../styles/global.css";
 			<AboutContent client:only />
 		</main>
 		<Footer />
+		<script>
+			if (window.location.hash) {
+				const hash = window.location.hash.substring(1);
+				const observer = new MutationObserver(() => {
+					const el = document.getElementById(hash);
+					if (el) {
+						observer.disconnect();
+						el.scrollIntoView({ behavior: "smooth" });
+					}
+				});
+				observer.observe(document.body, { childList: true, subtree: true });
+			}
+		</script>
 	</body>
 </html>

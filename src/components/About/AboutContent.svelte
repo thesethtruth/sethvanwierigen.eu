@@ -120,16 +120,17 @@
             solutions that create value.
         </p>
 
-        <h2 class="text-3xl" id="independent">Independent consultant</h2>
-        I'm always open to discuss potential collaborations, consulting projects
-        or job opportunities in the energy transition space. Combining energy, models/data/apps
-        and consulting is what I do best, but I'm also open to other opportunities
-        where I can add value. Feel free to&#32<a
-            href="/about#contact"
-            class="link"
-        >
-            reach out</a
-        > if you think we could be a good match!
+        <h2 class="text-3xl" id="consultant">Brains for hire</h2>
+        <p>
+            I'm always open to discuss potential collaborations, consulting
+            projects or job opportunities in the energy transition space.
+            Combining energy, models/data/apps and consulting is what I do best,
+            but I'm also open to other opportunities where I can add value.
+        </p>
+        <p>
+            Feel free to&#32<a href="/about#contact" class="link"> reach out</a>
+            if you think we could be a good match!
+        </p>
     </div>
 
     <!-- Skills -->
