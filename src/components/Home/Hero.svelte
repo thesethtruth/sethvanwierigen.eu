@@ -25,11 +25,11 @@
 >
     <div class="flex gap-x-2">
         <!-- Seth image -->
-        <div class=" h-48 w-48 overflow-hidden rounded-full drop-shadow-lg">
+        <div class="h-48 w-48 overflow-hidden rounded-full drop-shadow-lg shrink-0">
             <img
                 src={Seth.src}
                 alt="Seth van Wieringen"
-                class="absolute w-full h-full object-cover"
+                class="block w-full h-full object-cover"
             />
         </div>
         <!-- Shadow -->
