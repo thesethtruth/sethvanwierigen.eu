@@ -1,0 +1,17 @@
+---
+title: "Embed Plotly JSON from Hetzner in MDX"
+description: "Example blog post showing a Plotly chart loaded from Hetzner Object Storage JSON."
+pubDate: "2026-02-11"
+tags: ["sports", "visualization", "data"]
+---
+
+import PlotlyFromJson from "../../components/Blog/PlotlyFromJson.astro";
+
+This post demonstrates loading a Plotly chart definition (`data`, `layout`, optional `config`) from Hetzner Object Storage and rendering it directly inside MDX.
+
+<PlotlyFromJson
+	src="https://your-bucket.your-region.your-objectstorage.com/charts/example-plotly.json"
+	height="520px"
+/>
+
+If the chart does not render, confirm that your object is publicly readable and your bucket CORS allows browser `GET` requests from your site domain.

@@ -1,0 +1,102 @@
+---
+export interface Props {
+	src: string;
+	height?: string;
+	class?: string;
+	loadingText?: string;
+}
+
+const {
+	src,
+	height = '420px',
+	class: className = '',
+	loadingText = 'Loading chart...',
+} = Astro.props;
+
+if (!src) {
+	throw new Error('PlotlyFromJson requires a src prop.');
+}
+
+const chartId = `plotly-${Math.random().toString(36).slice(2, 10)}`;
+const statusId = `${chartId}-status`;
+---
+
+<div class={`plotly-json-embed ${className}`}>
+	<div id={chartId} style={`width: 100%; height: ${height};`} />
+	<p id={statusId} class="plotly-status">{loadingText}</p>
+</div>
+
+<script define:vars={{ chartId, statusId, src }}>
+	const chartEl = document.getElementById(chartId);
+	const statusEl = document.getElementById(statusId);
+
+	const loadPlotly = async () => {
+		if (window.Plotly) return window.Plotly;
+		if (window.__plotlyLoaderPromise) return window.__plotlyLoaderPromise;
+
+		window.__plotlyLoaderPromise = new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			script.src = 'https://cdn.plot.ly/plotly-2.35.2.min.js';
+			script.async = true;
+			script.onload = () => resolve(window.Plotly);
+			script.onerror = () => reject(new Error('Failed to load Plotly CDN script.'));
+			document.head.appendChild(script);
+		});
+
+		return window.__plotlyLoaderPromise;
+	};
+
+	const normalizeFigure = (figure) => {
+		if (Array.isArray(figure)) {
+			return { data: figure, layout: {}, config: {} };
+		}
+		if (figure && Array.isArray(figure.data)) {
+			return {
+				data: figure.data,
+				layout: figure.layout ?? {},
+				config: figure.config ?? {},
+			};
+		}
+		throw new Error('JSON must be a Plotly figure object ({ data, layout?, config? }).');
+	};
+
+	(async () => {
+		if (!chartEl) return;
+
+		try {
+			const [Plotly, response] = await Promise.all([
+				loadPlotly(),
+				fetch(src, { mode: 'cors' }),
+			]);
+
+			if (!response.ok) {
+				throw new Error(`HTTP ${response.status} while fetching chart JSON.`);
+			}
+
+			const figure = normalizeFigure(await response.json());
+			await Plotly.newPlot(chartEl, figure.data, figure.layout, {
+				responsive: true,
+				...figure.config,
+			});
+
+			statusEl?.remove();
+		} catch (error) {
+			const message =
+				error instanceof Error ? error.message : 'Unknown error while loading chart.';
+			if (statusEl) statusEl.textContent = `Could not load chart: ${message}`;
+			console.error('PlotlyFromJson error:', error);
+		}
+	})();
+</script>
+
+<style>
+	.plotly-json-embed {
+		margin: 1.5rem 0;
+	}
+
+	.plotly-status {
+		margin-top: 0.75rem;
+		font-size: 0.95rem;
+		opacity: 0.75;
+	}
+</style>
