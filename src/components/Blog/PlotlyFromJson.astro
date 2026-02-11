@@ -1,20 +1,40 @@
 ---
 export interface Props {
-	src: string;
+	host?: string;
+	baseURL?: string;
+	bucket?: string;
+	filepath?: string;
+	src?: string;
+	protocol?: 'https' | 'http';
 	height?: string;
 	class?: string;
 	loadingText?: string;
 }
 
 const {
+	host,
+	baseURL,
+	bucket,
+	filepath,
 	src,
+	protocol = 'https',
 	height = '420px',
 	class: className = '',
 	loadingText = 'Loading chart...',
 } = Astro.props;
 
-if (!src) {
-	throw new Error('PlotlyFromJson requires a src prop.');
+const resolvedHost = (host ?? baseURL)?.replace(/\/+$/, '');
+const normalizedPath = filepath?.replace(/^\/+/, '');
+const objectUrl =
+	src ??
+	(resolvedHost && bucket && normalizedPath
+		? `${protocol}://${resolvedHost}/${bucket}/${normalizedPath}`
+		: null);
+
+if (!objectUrl) {
+	throw new Error(
+		'PlotlyFromJson requires either src or (host + bucket + filepath) props.',
+	);
 }
 
 const chartId = `plotly-${Math.random().toString(36).slice(2, 10)}`;
@@ -26,7 +46,7 @@ const statusId = `${chartId}-status`;
 	<p id={statusId} class="plotly-status">{loadingText}</p>
 </div>
 
-<script define:vars={{ chartId, statusId, src }}>
+<script define:vars={{ chartId, statusId, objectUrl }}>
 	const chartEl = document.getElementById(chartId);
 	const statusEl = document.getElementById(statusId);
 
@@ -66,7 +86,7 @@ const statusId = `${chartId}-status`;
 		try {
 			const [Plotly, response] = await Promise.all([
 				loadPlotly(),
-				fetch(src, { mode: 'cors' }),
+				fetch(objectUrl, { mode: 'cors' }),
 			]);
 
 			if (!response.ok) {

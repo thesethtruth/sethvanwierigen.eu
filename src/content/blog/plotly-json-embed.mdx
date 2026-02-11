@@ -7,10 +7,14 @@ tags: ["sports", "visualization", "data"]
 
 import PlotlyFromJson from "../../components/Blog/PlotlyFromJson.astro";
 
+## Whats up subtitle
+
 This post demonstrates loading a Plotly chart definition (`data`, `layout`, optional `config`) from Hetzner Object Storage and rendering it directly inside MDX.
 
 <PlotlyFromJson
-	src="https://your-bucket.your-region.your-objectstorage.com/charts/example-plotly.json"
+    host="nbg1.your-objectstorage.com"
+	bucket="public-plots"
+	filepath="blog-sportsdata-art-activity-counts-bar-merged.json"
 	height="520px"
 />
 
