@@ -5,10 +5,11 @@ export interface Props {
 	bucket?: string;
 	filepath?: string;
 	src?: string;
-	protocol?: 'https' | 'http';
+	protocol?: "https" | "http";
 	height?: string;
 	class?: string;
 	loadingText?: string;
+	notes?: string | string[];
 }
 
 const {
@@ -17,14 +18,15 @@ const {
 	bucket,
 	filepath,
 	src,
-	protocol = 'https',
-	height = '420px',
-	class: className = '',
-	loadingText = 'Loading chart...',
+	protocol = "https",
+	height = "420px",
+	class: className = "",
+	loadingText = "Loading chart...",
+	notes,
 } = Astro.props;
 
-const resolvedHost = (host ?? baseURL)?.replace(/\/+$/, '');
-const normalizedPath = filepath?.replace(/^\/+/, '');
+const resolvedHost = (host ?? baseURL)?.replace(/\/+$/, "");
+const normalizedPath = filepath?.replace(/^\/+/, "");
 const objectUrl =
 	src ??
 	(resolvedHost && bucket && normalizedPath
@@ -33,7 +35,7 @@ const objectUrl =
 
 if (!objectUrl) {
 	throw new Error(
-		'PlotlyFromJson requires either src or (host + bucket + filepath) props.',
+		"PlotlyFromJson requires either src or (host + bucket + filepath) props.",
 	);
 }
 
@@ -42,8 +44,19 @@ const statusId = `${chartId}-status`;
 ---
 
 <div class={`plotly-json-embed ${className}`}>
-	<div id={chartId} style={`width: 100%; height: ${height};`} />
+	<div id={chartId} style={`width: 100%; height: ${height};`}></div>
 	<p id={statusId} class="plotly-status">{loadingText}</p>
+	{
+		notes && (
+			<div class="plotly-notes">
+				{(Array.isArray(notes) ? notes : notes.split("\n")).map(
+					(note) => (
+						<p>{note}</p>
+					),
+				)}
+			</div>
+		)
+	}
 </div>
 
 <script define:vars={{ chartId, statusId, objectUrl }}>
@@ -55,11 +68,12 @@ const statusId = `${chartId}-status`;
 		if (window.__plotlyLoaderPromise) return window.__plotlyLoaderPromise;
 
 		window.__plotlyLoaderPromise = new Promise((resolve, reject) => {
-			const script = document.createElement('script');
-			script.src = 'https://cdn.plot.ly/plotly-2.35.2.min.js';
+			const script = document.createElement("script");
+			script.src = "https://cdn.plot.ly/plotly-2.35.2.min.js";
 			script.async = true;
 			script.onload = () => resolve(window.Plotly);
-			script.onerror = () => reject(new Error('Failed to load Plotly CDN script.'));
+			script.onerror = () =>
+				reject(new Error("Failed to load Plotly CDN script."));
 			document.head.appendChild(script);
 		});
 
@@ -77,7 +91,9 @@ const statusId = `${chartId}-status`;
 				config: figure.config ?? {},
 			};
 		}
-		throw new Error('JSON must be a Plotly figure object ({ data, layout?, config? }).');
+		throw new Error(
+			"JSON must be a Plotly figure object ({ data, layout?, config? }).",
+		);
 	};
 
 	(async () => {
@@ -86,11 +102,13 @@ const statusId = `${chartId}-status`;
 		try {
 			const [Plotly, response] = await Promise.all([
 				loadPlotly(),
-				fetch(objectUrl, { mode: 'cors' }),
+				fetch(objectUrl, { mode: "cors" }),
 			]);
 
 			if (!response.ok) {
-				throw new Error(`HTTP ${response.status} while fetching chart JSON.`);
+				throw new Error(
+					`HTTP ${response.status} while fetching chart JSON.`,
+				);
 			}
 
 			const figure = normalizeFigure(await response.json());
@@ -102,9 +120,12 @@ const statusId = `${chartId}-status`;
 			statusEl?.remove();
 		} catch (error) {
 			const message =
-				error instanceof Error ? error.message : 'Unknown error while loading chart.';
-			if (statusEl) statusEl.textContent = `Could not load chart: ${message}`;
-			console.error('PlotlyFromJson error:', error);
+				error instanceof Error
+					? error.message
+					: "Unknown error while loading chart.";
+			if (statusEl)
+				statusEl.textContent = `Could not load chart: ${message}`;
+			console.error("PlotlyFromJson error:", error);
 		}
 	})();
 </script>
@@ -118,5 +139,27 @@ const statusId = `${chartId}-status`;
 		margin-top: 0.75rem;
 		font-size: 0.95rem;
 		opacity: 0.75;
+	}
+
+	.plotly-notes {
+		margin-top: 0;
+		padding-top: 0;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 70%;
+		color: rgb(148 163 184 / 0.8);
+		font-size: 0.9rem;
+		line-height: 1.2;
+		text-align: center;
+	}
+
+	.plotly-notes p + p {
+		margin-top: 0.3rem;
+	}
+
+	@media (max-width: 720px) {
+		.plotly-notes {
+			max-width: 100%;
+		}
 	}
 </style>
