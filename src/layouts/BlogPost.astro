@@ -38,7 +38,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				</p>
 				<h1 class="text-5xl mb-4">{title}</h1>
 				<p
-					class="text-slate-300 text-lg max-w-2xl leading-relaxed mb-10"
+					class="text-slate-300 text-xl max-w-2xl leading-relaxed mb-10"
 				>
 					{description}
 				</p>
@@ -95,6 +95,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 	.blog-content :global(p),
 	.blog-content :global(ul),
 	.blog-content :global(ol) {
+		font-size: 1.125rem;
 		line-height: 1.75;
 	}
 

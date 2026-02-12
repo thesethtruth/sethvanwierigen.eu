@@ -1,0 +1,78 @@
+---
+title: "The signal problem"
+description: "AI doesn't disrupt domains by getting smarter alone. It penetrates them by finding signals and good substrate."
+pubDate: "2026-02-12"
+---
+
+The discourse around AI capability is almost entirely about execution: what the model can do, how fast it codes, whether it can pass a bar exam. This framing is wrong. Execution does matters but this narative mistakes one layer for the whole stack. The real question isn't how capable AI is. It's how legible the domain is.
+
+## The stack
+
+AI transformation in any domain operates through multiple layers, not execution alone.
+<br>
+
+**Substrate** sits at the bottom. How effective AI is in working with the substrate highly depends on how expensive, slow, and entangled with physical and institutional reality a single iteration cycle is. This layer dictates the velocity of the entire system. 
+<br>
+
+**Execution** is the augmented loop between model and substrate: the model acts, the environment responds, the model reads that response and adjusts. Execution capability is not about "can the AI do the thing" but whether all links in this chain are tight and sense-act can be achieved. This is what's improving rapidly and what most commentary focuses on. 
+
+
+**Direction** is intent interpretation: navigating the gap between what someone says they want and what is achievable and what will actually serve them. A good product owner doesn't transcribe requirements. Instead they navigate ambiguity, they read between lines, reconcile contradictions, account for history and inertia. This is the layer where context, politics, and unstated constraints live. AI is getting better here, but this layer is fundamentally harder than execution because the signal is social, contextual, and often deliberately ambiguous.
+
+
+**Origination** is having the vision in the first place. Not interpreting what someone else wants, but seeing what's missing. The designer who looks at a situation and feels where a system is wrong. As AI compresses the layers below it, this is where human leverage concentrates.  
+
+
+**And signals run all of it.** Each layer depends on information flowing in loops. Not just at the substrate level, but everywhere. Execution requires the model to act, observe, and adjust. Direction requires reading intent, testing an interpretation, and correcting course. Even vision operates as a loop: you see what's missing, try something, and learn whether you were right. The quality of these signals — their bandwidth, noise, latency, and legibility — determines how well each layer functions. What makes software such an impacted domain isn't only that AI is smarter there. It's that the signals are crisp and that the substrate is a perfect match.
+
+## Why software is the special case
+
+In software engineering, you write code, run it, it either works or throws an error, you fix it, run again. The cycle costs nothing, takes seconds, and the environment is perfectly reproducible. The AI can iterate a thousand times in four hours and converge on something good. The zero-shot approach still yields a good first draft or demo. However, getting to deployable production code is cheaply searchable with the right harness. And it's exactly this part that has been automated in tools like Claude Code and Codex.
+
+This also explains why execution capability itself is more nuanced than "the model got smarter." I mean, sure, it got incrementally smarter. What actually happened is that the sense-act loop got tight. It works not because the underlying model became a genius, but because someone built a proper harness and trained the model to properly use it: the model calls a function, the terminal gives structured output, the compiler reports exactly what's wrong, the model adjusts. Every part of the loop is high bandwidth and low noise. 
+
+Now try scaling that to any domain where iteration is expensive. There is an inverse relationship between how transformative AI appears in a domain and how cheap and reproducible its iteration cycles are. Software has both: each cycle costs nothing, and the environment can be perfectly sandboxed and reproduced on demand. AI is a revolution here because the cost of being wrong approaches zero and every mistake is safely contained. In a discipline where iteration is expensive, slow, or impossible to isolate from the real world, that cost of being wrong remains the dominant cost of the entire enterprise.
+
+Software is a special case at every layer of the stack, not just substrate and execution. Direction is largely pre-solved: millions of implementations are freely available and fully captured in digital signals. Even poorly voiced intent — "let the user log in" — resolves almost automatically because the model has seen ten thousand login flows and can infer the form, the user table, the auth middleware, and the session handling without being told. Software engineers like to think they're solving unique problems, but most of what gets built is convergent. Try making a webpage without a header and buttons. The solution space is vast in theory and tiny in practice. Frameworks constrain solutions into patterns, conventions narrow the design space, and the gravitational pull of what already exists does the rest. They're channeling signals through existing tunnels, making search cheap. 
+
+The viral enthusiasm this generates is real but misleading. Matt Shumer's recent "[Something Big Is Happening](https://x.com/mattshumer_/status/2021256989876109403)" is a good example. It's a report from the one domain where all structural conditions are perfect, projected as a universal law. 
+
+Contrast that with architecture, policy design, or land use planning — domains where a single problem admits thousands of structurally different valid solutions, where constraints are soft, context-dependent, and contradictory. No framework channels you toward the right answer because there isn't one. The search space stays wide, iterations are expensive, and that's exactly where AI breaks down right now. Not because the problems are harder, but because they're wider problems without tunnels or guardrails.
+
+## Signal quality is the real bottleneck
+
+AI's penetration into any domain is a function of signal infrastructure, not model capability. Think about a construction project. The signal passes through multiple lossy human interfaces before anyone can act on it. Even if the AI is brilliant at each node, the loop is degraded by the interfaces between them. This reframes the entire AI transformation question. It's not "how smart is the model." It's "how legible is the domain."
+
+Some domains are naturally high-signal. Code, mathematics, structured data. The system state is fully observable, feedback is precise, error messages are informative. AI dominates here not because these tasks are easy but because the signal quality is perfect.
+
+Most of the actual economy is low-signal. Not because people are stupid, but because making systems legible is itself expensive, ongoing work. The information exists but it's trapped in someone's head, encoded in a relationship, expressed as a vague feeling that something is off, or buried in a PDF that contradicts the spreadsheet that contradicts what was agreed verbally in a meeting no one took notes in.
+
+A huge amount of professional labor is essentially signal cleaning - making the state of a system readable so someone can act on it. That's what accountants, project managers, quality inspectors, and consultants do. AI can help with this, but it cannot bypass it. Improving signal infrastructure is deeply unsexy work that takes years. 
+
+Signal quality is what determines whether the execution layer can close its loop. A brilliant model with a tight harness still fails if the domain doesn't emit readable feedback. And degraded signal at layer zero cascades upward. Intent interpretation becomes guesswork that never converges. And even the strongest intent origination can't compensate for a system that won't tell you what state it's in.
+
+
+## The real recursion
+
+None of this means signal infrastructure improves on its own schedule. The economic incentive to make domains legible is now enormous. Every MCP integration, tool, structured API, instrumented workflow is quietly but quickly cleaning signals in domains that were messy last year. The boring infrastructure work still takes years, not weeks. But it gets a lot less slow when there's a trillion-dollar incentive pushing it. The boundary between legible and illegible domains is shifting, and accelerating.
+
+Signals and substrate is where AI could be genuinely recursive. Not through self-improvement in the dramatic sense, but through the mundane, compounding work of signal infrastructure. AI is widening its own attack surface. AI's increasing execution capability accelerates the speed at which messy domains get made legible. The self-improvement isn't in getting marginally better weights, but in preparing more substrate to be effective on. Effectively, that's AI widening its own attack surface.
+
+This is slower than the "intelligence explosion" narrative but potentially more consequential. The intelligence explosion requires recursive gains in model capability, which faces diminishing returns. The signal expansion requires making messy real-world domains machine-readable, which faces institutional friction but benefits from enormous economic pressure and compounds over time as each newly legible domain enables the next.
+
+## What this predicts
+
+The domains where AI will be most disruptive first are the ones with good substrate and high signal quality. Domains that have environments and problems that can be perfectly sandboxed or simulated, where mistakes are free and contained. Drug discovery simulation, chip design, logistics optimization, energy systems modeling.
+
+None of this means AI stays confined to legible, high-signal domains with cheap substrate. It will push into messier territory through better simulation, better tooling, and the sheer economic pressure to make systems legible. The pace of that push is still governed by signal quality and substrate cost and not by model capability alone. 
+
+The domains that will resist longest aren't the ones with the hardest problems. They're the ones with the widest solution spaces, the most lossy signal chains, and the most expensive iteration cycles. Architecture, policy design, land use planning — where a single problem admits thousands of structurally different valid solutions, constraints are soft, context-dependent, and contradictory, and no framework channels you toward a right answer because there isn't one.
+
+What diffusion of this technology is going to look like is hard to say, with some arguing for [AI as normal technology](https://knightcolumbia.org/content/ai-as-normal-technology). Institutional adoption may take years, but institutional disruption doesn't require full adoption. It requires enough adoption in enough places to destabilize pricing, hiring patterns, and competitive assumptions. The likely pattern isn't Shumer's "everything, everywhere, all at once" but neither is it a slow, orderly transition. It's going to be pockets of devastation alongside vast stretches of business-as-usual, with the boundary between them shifting unpredictably. 
+
+
+## The human edge
+
+The real advantage goes to people with strong intent origination; layer three. Vision, taste, judgment. The ability to look at a problem and see what's missing, and then collapse layers one and two using AI: letting the machine handle execution and increasingly interpretation, while the human supplies direction. People who know what should exist and can now bring it into being faster than ever before. That part of Shumer's essay is right. The rest is a projection from the one domain where all the structural conditions are perfect, mistaken for a universal law. 
+
+The signal problem remains. Improving signal infrastructure — standardizing data formats, instrumenting processes, connecting systems that were never designed to talk to each other — is slow, boring, institutional work that takes years. But the pockets where signal is already clean _enough_ will be unrecognizable in two years. The hard part is that both of those things are true at the same time.

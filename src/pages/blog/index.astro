@@ -10,13 +10,17 @@ const posts = (await getCollection("blog")).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const pageDescription = "Writing on engineering, projects, data, and experiments.";
+const pageDescription =
+	"Writing on energy, projects, AI, data, and experiments. And anything else I find interesting enough to share.";
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Blog | ${SITE_TITLE}`} description={pageDescription} />
+		<BaseHead
+			title={`Blog | ${SITE_TITLE}`}
+			description={pageDescription}
+		/>
 	</head>
 	<body class="bg-slate-900 text-slate-200 flex flex-col min-h-screen">
 		<Header client:load currentPath={Astro.url.pathname} />
@@ -25,7 +29,11 @@ const pageDescription = "Writing on engineering, projects, data, and experiments
 				<h1 class="text-5xl mb-4 flex items-center gap-3">
 					<span class="text-teal-500/80">&#47;&#47;</span> Blog
 				</h1>
-				<p class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed">{pageDescription}</p>
+				<p
+					class="text-slate-300 text-lg mb-16 max-w-2xl leading-relaxed"
+				>
+					{pageDescription}
+				</p>
 
 				<h2 class="text-3xl mb-8 flex items-center gap-3">
 					<span class="text-teal-500/80">&#47;&#47;</span> Latest posts
@@ -43,12 +51,16 @@ const pageDescription = "Writing on engineering, projects, data, and experiments
 										class="group block border-l-2 border-teal-500/30 pl-6 hover:border-teal-500/60 transition-colors duration-300"
 									>
 										<p class="text-teal-300/70 text-sm mb-1">
-											<FormattedDate date={post.data.pubDate} />
+											<FormattedDate
+												date={post.data.pubDate}
+											/>
 										</p>
 										<h3 class="text-2xl text-slate-50/90 group-hover:text-teal-300/90 transition-colors duration-300 mb-2">
 											{post.data.title}
 										</h3>
-										<p class="text-slate-300 leading-relaxed">{post.data.description}</p>
+										<p class="text-slate-300 leading-relaxed">
+											{post.data.description}
+										</p>
 									</a>
 								</li>
 							))}
