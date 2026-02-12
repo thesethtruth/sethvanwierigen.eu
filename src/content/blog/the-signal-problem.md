@@ -9,21 +9,12 @@ The discourse around AI capability is almost entirely about execution: what the 
 ## The stack
 
 AI transformation in any domain operates through multiple layers, not execution alone.
-<br>
 
-**Substrate** sits at the bottom. How effective AI is in working with the substrate highly depends on how expensive, slow, and entangled with physical and institutional reality a single iteration cycle is. This layer dictates the velocity of the entire system. 
-<br>
-
-**Execution** is the augmented loop between model and substrate: the model acts, the environment responds, the model reads that response and adjusts. Execution capability is not about "can the AI do the thing" but whether all links in this chain are tight and sense-act can be achieved. This is what's improving rapidly and what most commentary focuses on. 
-
-
-**Direction** is intent interpretation: navigating the gap between what someone says they want and what is achievable and what will actually serve them. A good product owner doesn't transcribe requirements. Instead they navigate ambiguity, they read between lines, reconcile contradictions, account for history and inertia. This is the layer where context, politics, and unstated constraints live. AI is getting better here, but this layer is fundamentally harder than execution because the signal is social, contextual, and often deliberately ambiguous.
-
-
-**Origination** is having the vision in the first place. Not interpreting what someone else wants, but seeing what's missing. The designer who looks at a situation and feels where a system is wrong. As AI compresses the layers below it, this is where human leverage concentrates.  
-
-
-**And signals run all of it.** Each layer depends on information flowing in loops. Not just at the substrate level, but everywhere. Execution requires the model to act, observe, and adjust. Direction requires reading intent, testing an interpretation, and correcting course. Even vision operates as a loop: you see what's missing, try something, and learn whether you were right. The quality of these signals — their bandwidth, noise, latency, and legibility — determines how well each layer functions. What makes software such an impacted domain isn't only that AI is smarter there. It's that the signals are crisp and that the substrate is a perfect match.
+1. **Substrate** sits at the bottom. How effective AI is in working with the substrate highly depends on how expensive, slow, and entangled with physical and institutional reality a single iteration cycle is. This layer dictates the velocity of the entire system. 
+1. **Execution** is the augmented loop between model and substrate: the model acts, the environment responds, the model reads that response and adjusts. Execution capability is not about "can the AI do the thing" but whether all links in this chain are tight and sense-act can be achieved. This is what's improving rapidly and what most commentary focuses on. 
+1. **Direction** is intent interpretation: navigating the gap between what someone says they want and what is achievable and what will actually serve them. A good product owner doesn't transcribe requirements. Instead they navigate ambiguity, they read between lines, reconcile contradictions, account for history and inertia. This is the layer where context, politics, and unstated constraints live. AI is getting better here, but this layer is fundamentally harder than execution because the signal is social, contextual, and often deliberately ambiguous.
+1. **Origination** is having the vision in the first place. Not interpreting what someone else wants, but seeing what's missing. The designer who looks at a situation and feels where a system is wrong. As AI compresses the layers below it, this is where human leverage concentrates.  
+1. **And signals run all of it.** Each layer depends on information flowing in loops. Not just at the substrate level, but everywhere. Execution requires the model to act, observe, and adjust. Direction requires reading intent, testing an interpretation, and correcting course. Even vision operates as a loop: you see what's missing, try something, and learn whether you were right. The quality of these signals — their bandwidth, noise, latency, and legibility — determines how well each layer functions. What makes software such an impacted domain isn't only that AI is smarter there. It's that the signals are crisp and that the substrate is a perfect match.
 
 ## Why software is the special case
 
@@ -33,7 +24,9 @@ This also explains why execution capability itself is more nuanced than "the mod
 
 Now try scaling that to any domain where iteration is expensive. There is an inverse relationship between how transformative AI appears in a domain and how cheap and reproducible its iteration cycles are. Software has both: each cycle costs nothing, and the environment can be perfectly sandboxed and reproduced on demand. AI is a revolution here because the cost of being wrong approaches zero and every mistake is safely contained. In a discipline where iteration is expensive, slow, or impossible to isolate from the real world, that cost of being wrong remains the dominant cost of the entire enterprise.
 
-Software is a special case at every layer of the stack, not just substrate and execution. Direction is largely pre-solved: millions of implementations are freely available and fully captured in digital signals. Even poorly voiced intent — "let the user log in" — resolves almost automatically because the model has seen ten thousand login flows and can infer the form, the user table, the auth middleware, and the session handling without being told. Software engineers like to think they're solving unique problems, but most of what gets built is convergent. Try making a webpage without a header and buttons. The solution space is vast in theory and tiny in practice. Frameworks constrain solutions into patterns, conventions narrow the design space, and the gravitational pull of what already exists does the rest. They're channeling signals through existing tunnels, making search cheap. 
+Software is a special case at every layer of the stack, not just substrate and execution. Direction is largely pre-solved: millions of implementations are freely available and fully captured in digital signals. Even poorly voiced intent — "let the user log in" — resolves almost automatically because the model has seen ten thousand login flows and can infer the form, the user table, the auth middleware, and the session handling without being told. 
+
+Software engineers like to think they're solving unique problems, but most of what gets built is convergent. Try making a webpage without a header and buttons. The solution space is vast in theory and tiny in practice. Frameworks constrain solutions into patterns, conventions narrow the design space, and the gravitational pull of what already exists does the rest. They're channeling signals through existing tunnels, making search cheap. 
 
 The viral enthusiasm this generates is real but misleading. Matt Shumer's recent "[Something Big Is Happening](https://x.com/mattshumer_/status/2021256989876109403)" is a good example. It's a report from the one domain where all structural conditions are perfect, projected as a universal law. 
 
@@ -62,7 +55,7 @@ This is slower than the "intelligence explosion" narrative but potentially more 
 
 ## What this predicts
 
-The domains where AI will be most disruptive first are the ones with good substrate and high signal quality. Domains that have environments and problems that can be perfectly sandboxed or simulated, where mistakes are free and contained. Drug discovery simulation, chip design, logistics optimization, energy systems modeling.
+The domains where AI will be most disruptive first are the ones with good substrate and high signal quality. Domains that have environments and problems that can be perfectly sandboxed or simulated, where mistakes are free and contained. Drug discovery simulation, chip design, logistics optimization.
 
 None of this means AI stays confined to legible, high-signal domains with cheap substrate. It will push into messier territory through better simulation, better tooling, and the sheer economic pressure to make systems legible. The pace of that push is still governed by signal quality and substrate cost and not by model capability alone. 
 

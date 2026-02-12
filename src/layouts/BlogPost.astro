@@ -99,6 +99,39 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 		line-height: 1.75;
 	}
 
+	.blog-content :global(p + p),
+	.blog-content :global(p + ul),
+	.blog-content :global(p + ol),
+	.blog-content :global(ul + p),
+	.blog-content :global(ol + p) {
+		margin-top: 1rem;
+	}
+
+	.blog-content :global(ul),
+	.blog-content :global(ol) {
+		padding-left: 1.5rem;
+	}
+
+	.blog-content :global(ul) {
+		list-style: disc;
+	}
+
+	.blog-content :global(ol) {
+		list-style: decimal;
+	}
+
+	.blog-content :global(li + li) {
+		margin-top: 0.35rem;
+	}
+
+	.blog-content :global(li) {
+		padding-left: 0.35rem;
+	}
+
+	.blog-content :global(li::marker) {
+		color: rgb(20 184 166 / 0.8);
+	}
+
 	.blog-content :global(a) {
 		color: rgb(94 234 212 / 0.9);
 		text-decoration: underline;
