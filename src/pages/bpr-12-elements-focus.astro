@@ -1,0 +1,21 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.svelte";
+import TwelveElemente from "../components/TwelveElements/TwelveElemente.svelte";
+import { SITE_TITLE } from "../consts";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={`BPR 12 Elements Focus | ${SITE_TITLE}`} description="Vaste 12-elementen prioritering met simple en advanced scoremodus." />
+	</head>
+	<body class="bg-slate-900 text-slate-200 flex flex-col min-h-screen">
+		<Header client:load currentPath={Astro.url.pathname} />
+		<main class="flex-1">
+			<TwelveElemente client:only="svelte" />
+		</main>
+		<Footer />
+	</body>
+</html>

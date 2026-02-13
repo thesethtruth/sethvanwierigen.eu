@@ -187,7 +187,7 @@
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {#each CATEGORIES as cat}
                 <div
-                    class="bg-slate-800/50 border border-teal-500/20 rounded-lg p-4"
+                    class="bg-slate-800/50 border border-teal-500/20 rounded-lg p-4 flex flex-col min-h-[190px]"
                 >
                     <label
                         for="weight-{cat.key}"
@@ -205,7 +205,7 @@
                         bind:value={weights[cat.key]}
                         min="0"
                         step="0.5"
-                        class="w-full bg-slate-900/60 border border-slate-700 rounded px-3 py-2 text-slate-200 focus:border-teal-500/60 focus:outline-none"
+                        class="mt-auto w-full bg-slate-900/60 border border-slate-700 rounded px-3 py-2 text-slate-200 focus:border-teal-500/60 focus:outline-none"
                     />
                 </div>
             {/each}
@@ -251,7 +251,7 @@
                         <tr
                             class="border-b border-slate-700/50 hover:bg-slate-800/40 transition-colors"
                         >
-                            <td class="p-2">
+                            <td class="p-2 align-bottom">
                                 <input
                                     type="text"
                                     bind:value={row.naam}
@@ -260,7 +260,7 @@
                                 />
                             </td>
                             {#each CATEGORIES as cat}
-                                <td class="p-2">
+                                <td class="p-2 align-bottom">
                                     <select
                                         value={row.scores[cat.key]}
                                         onchange={(e) => {
@@ -280,7 +280,7 @@
                                     </select>
                                 </td>
                             {/each}
-                            <td class="p-2 text-center">
+                            <td class="p-2 text-center align-bottom">
                                 <button
                                     onclick={() => deleteRow(i)}
                                     class="text-red-400/60 hover:text-red-400 transition-colors cursor-pointer text-lg"
