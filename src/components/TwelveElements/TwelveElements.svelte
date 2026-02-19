@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { Copy } from "@lucide/svelte";
     import ElementImportanceCloud from "./ElementImportanceCloud.svelte";
 
     const ELEMENTS = [
@@ -53,6 +54,7 @@
         inschatting: 1,
     });
     let initialized = $state(false);
+    let copyStatus = $state("");
 
     function createDefaultRows(): ElementRow[] {
         return ELEMENTS.map((element) => ({
@@ -176,6 +178,113 @@
         return "text-slate-300";
     }
 
+    function formatScoreInt(value: number): string {
+        return String(Math.round(value));
+    }
+
+    function formatMetricInt(value: number): string {
+        return String(Math.round(value));
+    }
+
+    function escapeHtml(value: string): string {
+        return value
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;");
+    }
+
+    function buildResultsTableHeaders(): string[] {
+        const metricHeaders =
+            mode === "advanced"
+                ? ADVANCED_FIELDS.map((field) => field.label)
+                : ["Inschatting"];
+
+        return ["#", "Element", "Focus score", ...metricHeaders, "Notities"];
+    }
+
+    function buildResultsTableRows(): string[][] {
+        return results.map((result, index) => {
+            const metricValues =
+                mode === "advanced"
+                    ? [
+                          formatMetricInt(result.values.impact),
+                          formatMetricInt(result.values.tijdskritisch),
+                          formatMetricInt(result.values.onzekerheid),
+                      ]
+                    : [formatMetricInt(result.simple)];
+
+            return [
+                String(index + 1),
+                result.element,
+                formatScoreInt(result.score),
+                ...metricValues,
+                result.note ?? "",
+            ];
+        });
+    }
+
+    function buildResultsTableHtml(): string {
+        const headers = buildResultsTableHeaders();
+        const rowsData = buildResultsTableRows();
+        const headerHtml = headers
+            .map(
+                (header) =>
+                    `<th style="border:1px solid #d1d5db;padding:6px 8px;text-align:left;background:#f8fafc;">${escapeHtml(header)}</th>`,
+            )
+            .join("");
+        const rowsHtml = rowsData
+            .map((row) => {
+                const cells = row
+                    .map(
+                        (cell) =>
+                            `<td style="border:1px solid #d1d5db;padding:6px 8px;vertical-align:top;">${escapeHtml(cell)}</td>`,
+                    )
+                    .join("");
+                return `<tr>${cells}</tr>`;
+            })
+            .join("");
+
+        return `<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:10.5pt;"><thead><tr>${headerHtml}</tr></thead><tbody>${rowsHtml}</tbody></table>`;
+    }
+
+    function buildResultsTableText(): string {
+        const headers = buildResultsTableHeaders().join("\t");
+        const lines = buildResultsTableRows().map((row) =>
+            row.map((cell) => cell.replaceAll("\n", " ")).join("\t"),
+        );
+        return [headers, ...lines].join("\n");
+    }
+
+    async function copyResultsTableForWord() {
+        copyStatus = "";
+
+        try {
+            const html = buildResultsTableHtml();
+            const text = buildResultsTableText();
+
+            if (
+                typeof ClipboardItem !== "undefined" &&
+                navigator.clipboard?.write
+            ) {
+                const item = new ClipboardItem({
+                    "text/html": new Blob([html], { type: "text/html" }),
+                    "text/plain": new Blob([text], { type: "text/plain" }),
+                });
+                await navigator.clipboard.write([item]);
+            } else if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(text);
+            } else {
+                throw new Error("Clipboard API is not available.");
+            }
+
+            copyStatus = "Tabel gekopieerd. Plak direct in Word.";
+        } catch (error) {
+            console.error("Failed to copy Word table:", error);
+            copyStatus = "Kopieren mislukt in deze browser.";
+        }
+    }
+
     onMount(() => {
         rows = createDefaultRows();
 
@@ -227,7 +336,7 @@
                     ? 'bg-teal-600 text-white'
                     : 'text-slate-300 hover:bg-slate-700/80'}"
             >
-                Simple
+                Simpel
             </button>
             <button
                 type="button"
@@ -237,7 +346,7 @@
                     ? 'bg-teal-600 text-white'
                     : 'text-slate-300 hover:bg-slate-700/80'}"
             >
-                Advanced
+                Detail
             </button>
         </div>
     </section>
@@ -424,9 +533,23 @@
     </section>
 
     <section>
-        <h2 class="text-3xl mb-8 flex items-center gap-3">
-            <span class="text-teal-500/80">&#47;&#47;</span> Resultaten
-        </h2>
+        <div class="mb-8 flex items-start justify-between gap-4 flex-wrap">
+            <h2 class="text-3xl flex items-center gap-3">
+                <span class="text-teal-500/80">&#47;&#47;</span> Resultaten
+            </h2>
+            <div class="flex flex-col items-end gap-2">
+                <button
+                    type="button"
+                    onclick={copyResultsTableForWord}
+                    class="flex flex-row px-4 py-2 rounded-md text-sm border border-teal-500/40 bg-slate-900/50 text-teal-200 hover:bg-slate-800/60 transition-colors cursor-pointer"
+                >
+                    <Copy class="w-4 h-4 mr-2" /> Kopieer tabel voor Word
+                </button>
+                {#if copyStatus}
+                    <p class="text-xs text-slate-400">{copyStatus}</p>
+                {/if}
+            </div>
+        </div>
 
         <div class="overflow-x-auto">
             <table class="w-full border-collapse min-w-[980px]">
@@ -515,28 +638,30 @@
                                         result.score,
                                     )}"
                                 >
-                                    {result.score.toFixed(2)}
+                                    {formatScoreInt(result.score)}
                                 </span>
                             </td>
                             {#if mode === "advanced"}
                                 <td
                                     class="p-2 text-right font-normal font-mono text-slate-300"
-                                    >{result.values.impact.toFixed(2)}</td
+                                    >{formatMetricInt(result.values.impact)}</td
                                 >
                                 <td
                                     class="p-2 text-right font-normal font-mono text-slate-300"
-                                    >{result.values.tijdskritisch.toFixed(
-                                        2,
+                                    >{formatMetricInt(
+                                        result.values.tijdskritisch,
                                     )}</td
                                 >
                                 <td
                                     class="p-2 text-right font-normal font-mono text-slate-300"
-                                    >{result.values.onzekerheid.toFixed(2)}</td
+                                    >{formatMetricInt(
+                                        result.values.onzekerheid,
+                                    )}</td
                                 >
                             {:else}
                                 <td
                                     class="p-2 text-right font-normal font-mono text-slate-300"
-                                    >{result.simple.toFixed(2)}</td
+                                    >{formatMetricInt(result.simple)}</td
                                 >
                             {/if}
                             <td
