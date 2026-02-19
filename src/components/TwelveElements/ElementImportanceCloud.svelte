@@ -1,36 +1,204 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import {
-        buildImportanceCloud,
+        buildImportanceCloudLayout,
+        type ImportanceCloudWord,
         type ImportanceInput,
     } from "./importanceCloud";
 
     let { items = [] } = $props<{ items?: ImportanceInput[] }>();
+    let cloudWords = $state<ImportanceCloudWord[]>([]);
+    let cloudWidth = $state(880);
+    let cloudHeight = 420;
+    let isRendering = $state(false);
+    let renderError = $state("");
 
-    let cloudItems = $derived(buildImportanceCloud(items));
+    let containerEl: HTMLDivElement | null = null;
+    let renderSeq = 0;
+    let mounted = false;
+    let resizeObserver: ResizeObserver | null = null;
+    let layoutSeed = $state(Date.now());
+
+    async function renderCloud() {
+        if (!containerEl) return;
+        const width = Math.max(280, Math.floor(containerEl.clientWidth));
+
+        cloudWidth = width;
+        renderError = "";
+        const seq = ++renderSeq;
+
+        if (items.length === 0) {
+            cloudWords = [];
+            return;
+        }
+
+        isRendering = true;
+
+        try {
+            const words = await buildImportanceCloudLayout(
+                items,
+                cloudWidth,
+                cloudHeight,
+                {
+                    padding: 1,
+                    seed: layoutSeed,
+                },
+            );
+            if (seq === renderSeq) {
+                cloudWords = words;
+            }
+        } catch (error) {
+            if (seq === renderSeq) {
+                cloudWords = [];
+                renderError =
+                    error instanceof Error
+                        ? error.message
+                        : "Kon de word cloud niet tekenen.";
+            }
+        } finally {
+            if (seq === renderSeq) {
+                isRendering = false;
+            }
+        }
+    }
+
+    function downloadCloudPng() {
+        if (cloudWords.length === 0) return;
+
+        const ratio = Math.max(2, Math.ceil(window.devicePixelRatio || 1));
+        const canvas = document.createElement("canvas");
+        canvas.width = cloudWidth * ratio;
+        canvas.height = cloudHeight * ratio;
+
+        const context = canvas.getContext("2d");
+        if (!context) return;
+
+        context.scale(ratio, ratio);
+        context.fillStyle = "#ffffff";
+        context.fillRect(0, 0, cloudWidth, cloudHeight);
+
+        context.translate(cloudWidth / 2, cloudHeight / 2);
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+
+        for (const word of cloudWords) {
+            context.save();
+            context.translate(word.x, word.y);
+            context.rotate(0);
+            context.fillStyle = word.color;
+            context.font = `600 ${Math.round(word.size)}px Arial`;
+            context.fillText(word.text, 0, 0);
+            context.restore();
+        }
+
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "bpr-12-elements-word-cloud.png";
+        link.click();
+    }
+
+    function rerollCloud() {
+        layoutSeed = Date.now() + Math.floor(Math.random() * 100000);
+    }
+
+    onMount(() => {
+        mounted = true;
+        resizeObserver = new ResizeObserver(() => {
+            void renderCloud();
+        });
+        if (containerEl) {
+            resizeObserver.observe(containerEl);
+        }
+        void renderCloud();
+
+        return () => {
+            mounted = false;
+            resizeObserver?.disconnect();
+        };
+    });
+
+    $effect(() => {
+        items;
+        layoutSeed;
+        if (!mounted) return;
+        void renderCloud();
+    });
 </script>
 
 <section class="mt-16">
-    <h2 class="text-3xl mb-3 flex items-center gap-3">
-        <span class="text-teal-500/80">&#47;&#47;</span> Relatieve belangrijkheid
-    </h2>
+    <div class="flex items-end justify-between gap-4 flex-wrap mb-3">
+        <h2 class="text-3xl flex items-center gap-3">
+            <span class="text-teal-500/80">&#47;&#47;</span> Relatieve
+            belangrijkheid
+        </h2>
+        <div class="flex items-center gap-2">
+            <button
+                type="button"
+                onclick={rerollCloud}
+                disabled={isRendering || items.length === 0}
+                class="px-3 py-2 rounded-md text-sm border border-slate-500/40 bg-slate-900/50 text-slate-200 hover:bg-slate-800/60 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+                Reroll layout
+            </button>
+            <button
+                type="button"
+                onclick={downloadCloudPng}
+                disabled={cloudWords.length === 0 || isRendering}
+                class="px-3 py-2 rounded-md text-sm border border-teal-500/40 bg-slate-900/50 text-teal-200 hover:bg-slate-800/60 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            >
+                Download word cloud (PNG)
+            </button>
+        </div>
+    </div>
     <p class="text-slate-400 text-sm mb-6">
         Grootte geeft relatieve belangrijkheid op basis van de berekende focus
-        score.
+        score. Alle woorden blijven horizontaal.
     </p>
 
     <div
-        class="rounded-xl border border-teal-500/20 bg-slate-800/30 p-6 md:p-8 overflow-hidden"
+        bind:this={containerEl}
+        class="rounded-xl border border-teal-500/20 bg-white p-4 md:p-6 overflow-hidden"
     >
-        <div class="flex flex-wrap items-center gap-x-5 gap-y-4 leading-none">
-            {#each cloudItems as item}
-                <div
-                    class="text-teal-200 font-semibold select-none whitespace-nowrap"
-                    style="font-size: {item.sizePx}px; opacity: {item.alpha}; transform: rotate({item.tiltDeg}deg);"
-                    title={`#${item.rank} · ${item.score.toFixed(2)}`}
-                >
-                    {item.element}
-                </div>
-            {/each}
-        </div>
+        {#if renderError}
+            <p class="text-red-700 text-sm">{renderError}</p>
+        {:else if cloudWords.length === 0 && !isRendering}
+            <p class="text-slate-700 text-sm">
+                Nog geen data beschikbaar voor de word cloud.
+            </p>
+        {:else}
+            <svg
+                width="100%"
+                viewBox={`0 0 ${cloudWidth} ${cloudHeight}`}
+                role="img"
+                aria-label="Word cloud van 12 elementen"
+            >
+                <rect
+                    x="0"
+                    y="0"
+                    width={cloudWidth}
+                    height={cloudHeight}
+                    fill="#ffffff"
+                />
+                <g transform={`translate(${cloudWidth / 2}, ${cloudHeight / 2})`}>
+                    {#each cloudWords as word}
+                        <text
+                            x={word.x}
+                            y={word.y}
+                            text-anchor="middle"
+                            dominant-baseline="middle"
+                            fill={word.color}
+                            font-size={word.size}
+                            font-family="Arial"
+                            font-weight="600"
+                            transform={`rotate(0, ${word.x}, ${word.y})`}
+                            style="user-select: none;"
+                            title={`${word.text} · ${word.score.toFixed(2)}`}
+                        >
+                            {word.text}
+                        </text>
+                    {/each}
+                </g>
+            </svg>
+        {/if}
     </div>
 </section>
