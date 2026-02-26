@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTP-ELEC-017 — MV-kabelisolatiemeting</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #f5f3ef;
+    --surface: #ffffff;
+    --surface-alt: #faf9f7;
+    --border: #d4cfc7;
+    --border-strong: #a8a199;
+    --text: #2c2825;
+    --text-secondary: #6b6560;
+    --text-tertiary: #9a948e;
+    --accent: #c45a20;
+    --accent-light: #fdf0e8;
+    --accent-dark: #9e3f0e;
+    --gate-green: #2d7a3a;
+    --gate-green-bg: #e8f5ea;
+    --gate-amber: #b8860b;
+    --gate-amber-bg: #fef9e7;
+    --gate-red: #c0392b;
+    --gate-red-bg: #fdecea;
+    --cold: #1a6b8a;
+    --cold-bg: #e6f2f7;
+    --font-body: 'DM Sans', -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+    --radius: 3px;
+    --shadow-sm: 0 1px 2px rgba(44,40,37,0.06);
+    --shadow-md: 0 2px 8px rgba(44,40,37,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* === HEADER === */
+  .header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-brand {
+    padding: 20px 24px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 180px;
+    background: var(--text);
+    color: #f5f3ef;
+  }
+
+  .header-brand .brand-name {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .header-brand .brand-sub {
+    font-size: 11px;
+    color: #a8a199;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .header-id {
+    flex: 1;
+    padding: 16px 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .header-id .ctp-id {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.01em;
+  }
+
+  .header-id .ctp-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+  }
+
+  .header-meta {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    border-left: 1px solid var(--border);
+  }
+
+  .header-meta-item {
+    padding: 16px 20px;
+    border-left: 1px solid var(--border);
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .header-meta-item:first-child { border-left: none; }
+
+  .header-meta-item .meta-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+  }
+
+  .header-meta-item .meta-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    margin-top: 3px;
+  }
+
+  .header-project {
+    padding: 10px 24px;
+    background: var(--surface-alt);
+    display: flex;
+    gap: 32px;
+    font-size: 12.5px;
+    color: var(--text-secondary);
+  }
+
+  .header-project span { color: var(--text); font-weight: 500; }
+
+  /* === CLASSIFICATION BADGES === */
+  .classification-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    border: 1px solid;
+  }
+
+  .badge-cold {
+    background: var(--cold-bg);
+    color: var(--cold);
+    border-color: #b3d9e8;
+  }
+
+  .badge-discipline {
+    background: var(--accent-light);
+    color: var(--accent-dark);
+    border-color: #f0d4be;
+  }
+
+  .badge-domain {
+    background: var(--surface);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+
+  .badge-testtype {
+    background: var(--surface);
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
+
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .badge-cold .badge-dot { background: var(--cold); }
+  .badge-discipline .badge-dot { background: var(--accent); }
+
+  /* === SECTIONS === */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-alt);
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-light);
+    padding: 2px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text);
+  }
+
+  .section-body { padding: 16px 20px; }
+
+  /* === TABLES === */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  table th {
+    text-align: left;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+    background: var(--surface-alt);
+  }
+
+  table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #edeae5;
+    vertical-align: top;
+  }
+
+  table tr:last-child td { border-bottom: none; }
+
+  table td:first-child {
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+    width: 220px;
+  }
+
+  table td:last-child {
+    color: var(--text-secondary);
+  }
+
+  /* === PREREQUISITES / GATES === */
+  .prereq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .prereq-item {
+    padding: 12px 14px;
+    border: 1px solid #edeae5;
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+  }
+
+  .prereq-item.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .prereq-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .prereq-value {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .prereq-value code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: #f0ede8;
+    padding: 1px 5px;
+    border-radius: 2px;
+    color: var(--accent-dark);
+  }
+
+  .gate-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .gate-pass { background: var(--gate-green-bg); color: var(--gate-green); }
+  .gate-pending { background: var(--gate-amber-bg); color: var(--gate-amber); }
+  .gate-fail { background: var(--gate-red-bg); color: var(--gate-red); }
+
+  .gate-icon {
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+  }
+
+  /* === RESPONSIBLE PARTIES TABLE === */
+  .parties-table th { white-space: nowrap; }
+  .parties-table td:first-child { width: auto; }
+
+  .role-tag {
+    display: inline-block;
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  .role-required { background: var(--accent-light); color: var(--accent-dark); }
+  .role-witness { background: #f0ede8; color: var(--text-secondary); }
+
+  /* === TEST METHOD === */
+  .test-steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+
+  .test-steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #edeae5;
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .test-steps li:last-child { border-bottom: none; }
+
+  .test-steps li::before {
+    content: counter(step);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-light);
+    min-width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* === RESULTS === */
+  .result-banner {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .result-badge {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    letter-spacing: 0.03em;
+  }
+
+  .result-pass { background: var(--gate-green-bg); color: var(--gate-green); border: 1px solid #a3d4ab; }
+
+  .result-label {
+    font-size: 12px;
+    color: var(--text-tertiary);
+  }
+
+  /* === MEASUREMENTS TABLE === */
+  .measurements-table td:first-child { width: auto; font-family: var(--font-mono); font-size: 12px; }
+  .measurements-table td { text-align: center; }
+  .measurements-table th { text-align: center; }
+  .measurements-table td:first-child, .measurements-table th:first-child { text-align: left; }
+
+  .val-pass { color: var(--gate-green); font-weight: 600; font-family: var(--font-mono); font-size: 12.5px; }
+  .val-unit { color: var(--text-tertiary); font-size: 11px; }
+
+  /* === SIGN-OFF === */
+  .signoff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .signoff-card {
+    border: 1px solid #edeae5;
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    background: var(--surface-alt);
+  }
+
+  .signoff-role {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+  }
+
+  .signoff-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 4px;
+  }
+
+  .signoff-org {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 1px;
+  }
+
+  .signoff-line {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .signoff-sig {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  .signoff-date {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+
+  /* === PHOTO EVIDENCE === */
+  .photo-checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .photo-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    padding: 6px 10px;
+    background: var(--surface-alt);
+    border-radius: var(--radius);
+    border: 1px solid #edeae5;
+  }
+
+  .photo-check {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    background: var(--gate-green-bg);
+    color: var(--gate-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* === NCR === */
+  .ncr-none {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: var(--gate-green-bg);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--gate-green);
+    font-weight: 500;
+  }
+
+  /* === TRACEABILITY === */
+  .trace-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .trace-item {
+    padding: 10px 14px;
+    border: 1px solid #edeae5;
+    border-radius: var(--radius);
+    background: var(--surface-alt);
+  }
+
+  .trace-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .trace-value {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--text);
+  }
+
+  /* === IMPACT ITEMS === */
+  .impact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .impact-item {
+    padding: 12px 14px;
+    border: 1px solid #edeae5;
+    border-radius: var(--radius);
+  }
+
+  .impact-item.full-width { grid-column: 1 / -1; }
+
+  .impact-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .impact-value {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  .impact-flag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+
+  .flag-no { color: var(--gate-green); }
+  .flag-yes { color: var(--gate-amber); }
+
+  /* === ACCEPTANCE CRITERIA === */
+  .criteria-box {
+    background: var(--surface-alt);
+    border: 1px solid #edeae5;
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-top: 12px;
+  }
+
+  .criteria-box .criteria-label {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--text-tertiary);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .criteria-box .criteria-value {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* === FOOTER === */
+  .footer {
+    margin-top: 32px;
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span { font-weight: 600; color: var(--text-secondary); }
+
+  /* === PRINT === */
+  @media print {
+    body { background: white; font-size: 11px; }
+    .page { padding: 0; max-width: none; }
+    .section { break-inside: avoid; box-shadow: none; }
+    .header { box-shadow: none; }
+  }
+
+  @media (max-width: 640px) {
+    .header-top { flex-direction: column; }
+    .header-meta { border-left: none; border-top: 1px solid var(--border); }
+    .header-brand { border-right: none; border-bottom: 1px solid var(--border); }
+    .prereq-grid, .signoff-grid, .photo-checklist, .trace-grid, .impact-grid {
+      grid-template-columns: 1fr;
+    }
+    .prereq-item.full-width, .impact-item.full-width { grid-column: auto; }
+    .parties-table { font-size: 11.5px; }
+    .measurements-table { font-size: 11.5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ========== HEADER ========== -->
+  <div class="header">
+    <div class="header-top">
+      <div class="header-brand">
+        <div class="brand-name">BPR Solar</div>
+        <div class="brand-sub">Commissioning Test Plan</div>
+      </div>
+      <div class="header-id">
+        <div class="ctp-id">CTP-ELEC-017</div>
+        <div class="ctp-title">MV-kabelisolatiemeting — MVPS-NW naar Customer Substation</div>
+      </div>
+      <div class="header-meta">
+        <div class="header-meta-item">
+          <div class="meta-label">Revisie</div>
+          <div class="meta-value">Rev 0</div>
+        </div>
+        <div class="header-meta-item">
+          <div class="meta-label">Gepland</div>
+          <div class="meta-value">2026-07-14</div>
+        </div>
+        <div class="header-meta-item">
+          <div class="meta-label">Uitgevoerd</div>
+          <div class="meta-value">2026-07-14</div>
+        </div>
+      </div>
+    </div>
+    <div class="header-project">
+      Project: <span>Zerbst Solar Park — ZNP01</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      WBS: <span>3.2.1 MV-bekabeling</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;
+      Subsysteem: <span>MVPS-NW → CSS</span>
+    </div>
+  </div>
+
+  <!-- ========== CLASSIFICATION ========== -->
+  <div class="classification-bar">
+    <div class="badge badge-cold"><div class="badge-dot"></div>Dead test</div>
+    <div class="badge badge-discipline"><div class="badge-dot"></div>Elektrisch</div>
+    <div class="badge badge-domain">MV</div>
+    <div class="badge badge-testtype">Isolatiemeting</div>
+  </div>
+
+  <!-- ========== 3. VOORWAARDEN ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">03</span>
+      <span class="section-title">Voorwaarden (prerequisites)</span>
+    </div>
+    <div class="section-body">
+      <div class="prereq-grid">
+        <div class="prereq-item">
+          <div class="prereq-label">Upstream CTP-afhankelijkheden</div>
+          <div class="prereq-value">
+            <code>CTP-ELEC-009</code> Aardingssysteem isolatiemeting
+            <br><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Geslaagd</span>
+          </div>
+        </div>
+        <div class="prereq-item">
+          <div class="prereq-label">ITP-afhankelijkheden</div>
+          <div class="prereq-value">
+            <code>ITP-MV-003</code> MV-terminaties MVPS-NW
+            <br><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Afgesloten</span>
+          </div>
+        </div>
+        <div class="prereq-item">
+          <div class="prereq-label">Bouwkundige gereedheid</div>
+          <div class="prereq-value">MV-kabels getrokken en getermineerd aan beide zijden (MVPS-NW en CSS). Kabelgoten gesloten. Geen openstaande civiele werkzaamheden in kabelroute.</div>
+        </div>
+        <div class="prereq-item">
+          <div class="prereq-label">Isolatie- / lockout-eisen</div>
+          <div class="prereq-value">Alle aansluitingen aan beide zijden geïsoleerd en gelabeld. Lockout/tagout conform veiligheidsprocedure VP-EL-004. Aarde verwijderd vóór meting.</div>
+        </div>
+        <div class="prereq-item">
+          <div class="prereq-label">Omgevingscondities</div>
+          <div class="prereq-value">Droge omstandigheden, omgevingstemperatuur &gt;5°C, geen onweer verwacht gedurende testperiode.</div>
+        </div>
+        <div class="prereq-item">
+          <div class="prereq-label">Benodigde meetapparatuur</div>
+          <div class="prereq-value">Megger MIT1025 isolatiemeter (10 kV DC), gekalibreerd. VLF-testset voor 0,1 Hz meting. Aardingsklemmen en testleidingen.</div>
+        </div>
+        <div class="prereq-item full-width">
+          <div class="prereq-label">Beschikbare documentatie</div>
+          <div class="prereq-value">SLD rev AFC (ZNP01-SLD-003-R2), MV-kabelspecificatie (ZNP01-SPEC-MV-001), fabrikant testprotocol Nexans XLPE 20 kV, relay settings sheet CSS veld NW.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 4. VERANTWOORDELIJKE PARTIJEN ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">04</span>
+      <span class="section-title">Verantwoordelijke partijen en getuigen</span>
+    </div>
+    <div class="section-body">
+      <table class="parties-table">
+        <thead>
+          <tr>
+            <th>Rol</th>
+            <th>Status</th>
+            <th>Persoon</th>
+            <th>Organisatie</th>
+            <th>Op locatie</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Testeigenaar</td>
+            <td><span class="role-tag role-required">Vereist</span></td>
+            <td>M. Hoffmann</td>
+            <td>ElectroPlan GmbH</td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td>ESSM</td>
+            <td><span class="role-tag role-required">Vereist</span></td>
+            <td>—</td>
+            <td>BPR Solar</td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td>Quality Manager</td>
+            <td><span class="role-tag role-required">Vereist</span></td>
+            <td>B. Robrechts</td>
+            <td>BPR Solar</td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td>Site Manager</td>
+            <td><span class="role-tag role-witness">Getuige</span></td>
+            <td>—</td>
+            <td>Sunotec</td>
+            <td>Nee</td>
+          </tr>
+          <tr>
+            <td>IV-er</td>
+            <td><span class="role-tag role-required">Vereist</span></td>
+            <td>—</td>
+            <td>(aangewezen door Statkraft)</td>
+            <td>Ja</td>
+          </tr>
+          <tr>
+            <td>TDD</td>
+            <td><span class="role-tag role-witness">Getuige</span></td>
+            <td>—</td>
+            <td>(onafhankelijk)</td>
+            <td>Nee</td>
+          </tr>
+          <tr>
+            <td>Netbeheerder / DNO</td>
+            <td><span class="role-tag role-witness">Getuige</span></td>
+            <td>—</td>
+            <td>Avacon Netz</td>
+            <td>Nee</td>
+          </tr>
+          <tr>
+            <td>EPC-vertegenwoordiger</td>
+            <td><span class="role-tag role-witness">Getuige</span></td>
+            <td>K. Lyubenov</td>
+            <td>Sunotec</td>
+            <td>Optioneel</td>
+          </tr>
+          <tr>
+            <td>Opdrachtgever</td>
+            <td><span class="role-tag role-witness">Getuige</span></td>
+            <td>—</td>
+            <td>Statkraft</td>
+            <td>Optioneel</td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 12px; font-size: 12px; color: var(--text-tertiary); font-style: italic;">
+        Notificatie: Witness points minimaal 5 werkdagen van tevoren aangekondigd met datum, tijdstip en CTP-referentie.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 5. TESTBESCHRIJVING ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">05</span>
+      <span class="section-title">Testbeschrijving</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <tbody>
+          <tr>
+            <td>Doelstelling</td>
+            <td>Verifiëren dat de isolatieweerstand van de MV-kabels (20 kV XLPE) tussen MVPS-NW en de Customer Substation voldoet aan de specificaties vóór eerste energisatie.</td>
+          </tr>
+          <tr>
+            <td>Toepasselijke normen</td>
+            <td>IEC 60502-2, IEC 62446-1, VDE 0276-620, Nexans XLPE testprotocol v3.2</td>
+          </tr>
+          <tr>
+            <td>Verwachte duur</td>
+            <td>3 uur (incl. opbouw, meting drie fasen + scherm, afbouw)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 16px;">
+        <div class="prereq-label" style="margin-bottom: 8px;">Testmethode</div>
+        <ol class="test-steps">
+          <li>Visuele inspectie van alle terminaties en kabeluiteinden aan beide zijden. Controleer dat alle verbindingen open zijn en lockout/tagout correct is toegepast.</li>
+          <li>Isolatiemeting fase L1 t.o.v. aarde bij 5 kV DC gedurende 60 seconden. Registreer weerstandswaarde na stabilisatie.</li>
+          <li>Herhaal stap 2 voor fase L2 en fase L3.</li>
+          <li>Isolatiemeting van het kabelscherm t.o.v. aarde bij 1 kV DC gedurende 60 seconden.</li>
+          <li>VLF-meting (0,1 Hz) bij 3 × U₀ (= 34,6 kV) gedurende 30 minuten per fase conform VDE 0276-620. Geen doorslag toegestaan.</li>
+          <li>Na afronding: aarden van alle fasen, lockout herstellen, meetapparatuur verwijderen.</li>
+          <li>Resultaten vastleggen in meetrapport, foto's van meetopstelling en aflezingen.</li>
+        </ol>
+      </div>
+
+      <div class="criteria-box">
+        <div class="criteria-label">Acceptatiecriteria</div>
+        <div class="criteria-value">
+          Isolatieweerstand ≥ 100 MΩ per fase bij 5 kV DC na 60s &nbsp;|&nbsp; Scherm ≥ 10 MΩ bij 1 kV DC &nbsp;|&nbsp; VLF: geen doorslag bij 34,6 kV gedurende 30 min
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 6. IMPACT & AFHANKELIJKHEDEN ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">06</span>
+      <span class="section-title">Impact en afhankelijkheden</span>
+    </div>
+    <div class="section-body">
+      <div class="impact-grid">
+        <div class="impact-item">
+          <div class="impact-label">Getroffen gebieden</div>
+          <div class="impact-value">Kabelroute NW-zone (vak A3–A7). Toegangsbeperking gedurende VLF-meting — veiligheidszone 5 meter rondom testkabels.</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-label">Downstream afhankelijkheden</div>
+          <div class="impact-value">
+            <code>CTP-ELEC-022</code> Faseverificatie MV-NW<br>
+            <code>CTP-ELEC-031</code> Transformator energisatie MVPS-NW (24h rusttijd)
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-label">Impact op geënergiseerde systemen</div>
+          <div class="impact-value"><span class="impact-flag flag-no">Nee</span> — systeem is nog niet geënergiseerd</div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-label">Impact op netaansluiting</div>
+          <div class="impact-value"><span class="impact-flag flag-no">Nee</span> — dead test, geen betrokkenheid netbeheerder vereist</div>
+        </div>
+        <div class="impact-item full-width">
+          <div class="impact-label">HSE-implicaties</div>
+          <div class="impact-value">Hoogspanningsmeting (VLF tot 34,6 kV) — uitsluitend door bevoegd personeel met NEN 3840-certificering. Veiligheidszone instellen en bewaken. Defibrillator beschikbaar op locatie.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 7. RESULTATEN ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">07</span>
+      <span class="section-title">Resultaten en bewijsvoering</span>
+    </div>
+    <div class="result-banner">
+      <div class="result-badge result-pass">GESLAAGD</div>
+      <div class="result-label">Alle meetwaarden binnen acceptatiecriteria. Geen afwijkingen geconstateerd.</div>
+    </div>
+    <div class="section-body">
+      <table class="measurements-table">
+        <thead>
+          <tr>
+            <th>Meting</th>
+            <th>Testspanning</th>
+            <th>Criterium</th>
+            <th>Gemeten waarde</th>
+            <th>Resultaat</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>L1 → aarde</td>
+            <td>5 kV DC <span class="val-unit">/ 60s</span></td>
+            <td>≥ 100 MΩ</td>
+            <td class="val-pass">2.340 MΩ</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>L2 → aarde</td>
+            <td>5 kV DC <span class="val-unit">/ 60s</span></td>
+            <td>≥ 100 MΩ</td>
+            <td class="val-pass">2.180 MΩ</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>L3 → aarde</td>
+            <td>5 kV DC <span class="val-unit">/ 60s</span></td>
+            <td>≥ 100 MΩ</td>
+            <td class="val-pass">2.510 MΩ</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>Scherm → aarde</td>
+            <td>1 kV DC <span class="val-unit">/ 60s</span></td>
+            <td>≥ 10 MΩ</td>
+            <td class="val-pass">485 MΩ</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>VLF L1</td>
+            <td>34,6 kV <span class="val-unit">/ 0,1 Hz / 30 min</span></td>
+            <td>Geen doorslag</td>
+            <td class="val-pass">Geen doorslag</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>VLF L2</td>
+            <td>34,6 kV <span class="val-unit">/ 0,1 Hz / 30 min</span></td>
+            <td>Geen doorslag</td>
+            <td class="val-pass">Geen doorslag</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+          <tr>
+            <td>VLF L3</td>
+            <td>34,6 kV <span class="val-unit">/ 0,1 Hz / 30 min</span></td>
+            <td>Geen doorslag</td>
+            <td class="val-pass">Geen doorslag</td>
+            <td><span class="gate-status gate-pass"><span class="gate-icon">✓</span> Pass</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top: 20px;">
+        <div class="prereq-label" style="margin-bottom: 8px;">Fotodocumentatie</div>
+        <div class="photo-checklist">
+          <div class="photo-item"><div class="photo-check">✓</div>Meetopstelling overzicht</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Apparaatlabel + serienummer Megger</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Kalibratiesticker meetapparatuur</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Aflezingen per fase (display)</div>
+          <div class="photo-item"><div class="photo-check">✓</div>VLF-testset aangesloten</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Veiligheidszone-afzetting</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Terminatie MVPS-NW zijde</div>
+          <div class="photo-item"><div class="photo-check">✓</div>Terminatie CSS zijde</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <div class="prereq-label" style="margin-bottom: 6px;">Afwijkingen / opmerkingen</div>
+        <div style="font-size: 13px; color: var(--text-secondary);">Geen afwijkingen. Temperatuur tijdens meting: 14°C. Relatieve luchtvochtigheid: 62%. Weersomstandigheden: droog, bewolkt.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 8. AFTEKENING ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">08</span>
+      <span class="section-title">Aftekening</span>
+    </div>
+    <div class="section-body">
+      <div class="signoff-grid">
+        <div class="signoff-card">
+          <div class="signoff-role">Testeigenaar</div>
+          <div class="signoff-name">M. Hoffmann</div>
+          <div class="signoff-org">ElectroPlan GmbH</div>
+          <div class="signoff-line">
+            <div class="signoff-sig">Handtekening: _______________</div>
+            <div class="signoff-date">2026-07-14</div>
+          </div>
+        </div>
+        <div class="signoff-card">
+          <div class="signoff-role">ESSM</div>
+          <div class="signoff-name">—</div>
+          <div class="signoff-org">BPR Solar</div>
+          <div class="signoff-line">
+            <div class="signoff-sig">Handtekening: _______________</div>
+            <div class="signoff-date">2026-07-14</div>
+          </div>
+        </div>
+        <div class="signoff-card">
+          <div class="signoff-role">Quality Manager</div>
+          <div class="signoff-name">B. Robrechts</div>
+          <div class="signoff-org">BPR Solar</div>
+          <div class="signoff-line">
+            <div class="signoff-sig">Handtekening: _______________</div>
+            <div class="signoff-date">2026-07-14</div>
+          </div>
+        </div>
+        <div class="signoff-card">
+          <div class="signoff-role">IV-er</div>
+          <div class="signoff-name">—</div>
+          <div class="signoff-org">(aangewezen door Statkraft)</div>
+          <div class="signoff-line">
+            <div class="signoff-sig">Handtekening: _______________</div>
+            <div class="signoff-date">2026-07-14</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 9. NCR ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">09</span>
+      <span class="section-title">Koppeling met non-conformiteiten</span>
+    </div>
+    <div class="section-body">
+      <div class="ncr-none">
+        <span style="font-size: 14px;">✓</span>
+        Geen non-conformiteiten geregistreerd voor deze test.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 10. TRACEERBAARHEID ========== -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-number">10</span>
+      <span class="section-title">Traceerbaarheid</span>
+    </div>
+    <div class="section-body">
+      <div class="trace-grid">
+        <div class="trace-item">
+          <div class="trace-label">Geteste kabel</div>
+          <div class="trace-value">Nexans XLPE 20 kV 3×1×240mm²<br>Batch: NX-2026-04-1187</div>
+        </div>
+        <div class="trace-item">
+          <div class="trace-label">Isolatiemeter</div>
+          <div class="trace-value">Megger MIT1025<br>S/N: 251-04892<br>Kal. geldig tot: 2026-11-30</div>
+        </div>
+        <div class="trace-item">
+          <div class="trace-label">VLF-testset</div>
+          <div class="trace-value">HV Diagnostics VLF-65CM<br>S/N: VLF-2024-0337<br>Kal. geldig tot: 2027-02-15</div>
+        </div>
+        <div class="trace-item">
+          <div class="trace-label">Softwareversies</div>
+          <div class="trace-value">N.v.t. — geen software betrokken bij deze test</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>BPR Solar</span> &nbsp;·&nbsp; Commissioning Test Plan &nbsp;·&nbsp; CTP-ELEC-017 Rev 0 &nbsp;·&nbsp; Zerbst Solar Park — ZNP01
+  </div>
+
+</div>
+
+</body>
+</html>
