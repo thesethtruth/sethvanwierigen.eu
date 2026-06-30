@@ -1,0 +1,75 @@
+---
+interface Link {
+    href: string;
+    label: string;
+}
+
+interface Props {
+    currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const links: Link[] = [
+    { href: "/", label: "Home" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "About" },
+];
+
+const isActive = (path: string) =>
+    path === "/" ? currentPath === "/" : currentPath.startsWith(path);
+---
+
+<header class="px-12 py-10 bg-slate-900/50 absolute w-full top-0 left-0 z-50">
+    <nav class="flex items-center justify-between">
+        <a href="/" class="text-4xl text-slate-50/90 font-josefin tracking-wide">
+            Seth <span class="hidden md:inline">van Wieringen</span>
+        </a>
+
+        <div class="gap-8 text-xl hidden sm:flex">
+            {links.map(({ href, label }) => (
+                <a
+                    href={href}
+                    class:list={[
+                        "hover:text-teal-300/80",
+                        isActive(href) && "text-teal-300/80 font-semibold",
+                    ]}
+                >
+                    {label}
+                </a>
+            ))}
+        </div>
+
+        <details class="sm:hidden relative">
+            <summary
+                class="flex flex-col gap-1.5 justify-center items-center list-none cursor-pointer"
+                aria-label="Menu"
+            >
+                <span class="w-8 h-0.5 bg-slate-50/90 rounded"></span>
+                <span class="w-8 h-0.5 bg-slate-50/90 rounded"></span>
+                <span class="w-8 h-0.5 bg-slate-50/90 rounded"></span>
+            </summary>
+            <div class="absolute right-0 top-full mt-4 min-w-48 rounded-lg border border-slate-700/70 bg-slate-900/95 px-6 py-5 shadow-lg backdrop-blur-sm">
+                <div class="flex flex-col items-end gap-5 text-2xl">
+                    {links.map(({ href, label }) => (
+                        <a
+                            href={href}
+                            class:list={[
+                                "hover:text-teal-300/80",
+                                isActive(href) && "text-teal-300/80 font-semibold",
+                            ]}
+                        >
+                            {label}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </details>
+    </nav>
+</header>
+
+<style>
+    details > summary::-webkit-details-marker {
+        display: none;
+    }
+</style>

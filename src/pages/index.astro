@@ -1,8 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.svelte";
-import Hero from "../components/Home/Hero.svelte";
+import Header from "../components/Header.astro";
+import Hero from "../components/Home/Hero.astro";
 import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 import "../styles/global.css";
 ---
@@ -12,9 +12,9 @@ import "../styles/global.css";
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body class="bg-slate-900 text-slate-200 flex flex-col min-h-screen">
-		<Header client:load currentPath={Astro.url.pathname} />
+		<Header currentPath={Astro.url.pathname} />
 		<main class="flex-1 flex flex-col items-center justify-center">
-			<Hero client:only />
+			<Hero />
 		</main>
 		<Footer />
 	</body>

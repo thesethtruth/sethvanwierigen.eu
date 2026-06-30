@@ -2,6 +2,38 @@
     import { Badge } from "$lib/components/ui/badge";
     import ProjectCard from "./ProjectCard.svelte";
 
+    type Project = {
+        title: string;
+        role: string;
+        description: string;
+        tags: string[];
+        period?: string;
+        link?: string;
+    };
+
+    function getSortYear(period: string = ""): number {
+        if (!period) {
+            return 0;
+        }
+
+        if (/present/i.test(period)) {
+            return Number.MAX_SAFE_INTEGER;
+        }
+
+        const matches = period.match(/\b(19|20)\d{2}\b/g);
+        if (!matches) {
+            return 0;
+        }
+
+        return Math.max(...matches.map(Number));
+    }
+
+    function sortProjectsNewestFirst(projects: Project[]): Project[] {
+        return [...projects].sort((a, b) => {
+            return getSortYear(b.period) - getSortYear(a.period);
+        });
+    }
+
     const researchInterests = [
         "Energy system optimisation under uncertainty: robust decision-making for infrastructure planning when costs, policies, and technologies evolve",
         "Grid integration of variable renewables: cable pooling, storage co-location, and network-aware capacity expansion",
@@ -93,6 +125,9 @@
             period: "2024-2026",
         },
     ];
+
+    const consultingProjectsSorted = sortProjectsNewestFirst(consultingProjects);
+    const toolingProjectsSorted = sortProjectsNewestFirst(toolingProjects);
 </script>
 
 <div class="max-w-4xl mx-auto px-6 pt-36 pb-20">
@@ -108,7 +143,7 @@
             <span class="text-teal-500/80">&#47;&#47;</span> Consulting
         </h2>
         <div class="grid gap-10">
-            {#each consultingProjects as project}
+            {#each consultingProjectsSorted as project}
                 <ProjectCard {...project} />
             {/each}
         </div>
@@ -120,7 +155,7 @@
             <span class="text-teal-500/80">&#47;&#47;</span> Tooling & Development
         </h2>
         <div class="grid gap-10">
-            {#each toolingProjects as project}
+            {#each toolingProjectsSorted as project}
                 <ProjectCard {...project} />
             {/each}
         </div>

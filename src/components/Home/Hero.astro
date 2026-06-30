@@ -1,0 +1,50 @@
+---
+import { Image } from "astro:assets";
+import Seth from "../../assets/seth.jpg";
+import HeroAbout from "./HeroAbout.svelte";
+import HeroItem from "./HeroItem.svelte";
+import HeroSocials from "./HeroSocials.svelte";
+
+const heroItems = [
+    {
+        title: "consulting engineer.",
+        target: "/projects#consulting",
+    },
+    {
+        title: "energy nerd.",
+        target: "/projects#research-teaching",
+    },
+    {
+        title: "developer.",
+        target: "/projects#tooling",
+    },
+];
+---
+
+<div class="flex flex-col items-center justify-center pt-2 mt-32 mb-20 max-w-3xl text-center px-8">
+    <div class="flex gap-x-2">
+        <div class="h-48 w-48 overflow-hidden rounded-full drop-shadow-lg shrink-0">
+            <Image
+                src={Seth}
+                alt="Seth van Wieringen"
+                width={192}
+                height={192}
+                sizes="192px"
+                loading="eager"
+                fetchpriority="high"
+                class="block w-full h-full object-cover"
+            />
+        </div>
+        <div class="h-48 w-48 -z-10 rounded-full bg-teal-500/70 absolute -translate-x-2 -translate-y-1"></div>
+
+        <div class="text-teal-100/80 my-auto space-y-0.5 text-4xl text-left w-fit hidden md:block">
+            {heroItems.map((item) => (
+                <HeroItem title={item.title} target={item.target} />
+            ))}
+        </div>
+    </div>
+    <div>
+        <HeroAbout />
+        <HeroSocials />
+    </div>
+</div>

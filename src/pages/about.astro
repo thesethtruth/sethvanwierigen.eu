@@ -1,8 +1,8 @@
 ---
 import BaseHead from "../components/BaseHead.astro";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.svelte";
-import AboutContent from "../components/About/AboutContent.svelte";
+import Header from "../components/Header.astro";
+import AboutContent from "../components/About/AboutContent.astro";
 import { SITE_TITLE } from "../consts";
 import "../styles/global.css";
 ---
@@ -12,23 +12,10 @@ import "../styles/global.css";
 		<BaseHead title={`About | ${SITE_TITLE}`} description="Energy systems modeller, physics teacher by qualification, coach by nature. Education, experience, research, and skills." />
 	</head>
 	<body class="bg-slate-900 text-slate-200 flex flex-col min-h-screen">
-		<Header client:load currentPath={Astro.url.pathname} />
+		<Header currentPath={Astro.url.pathname} />
 		<main class="flex-1">
-			<AboutContent client:only />
+			<AboutContent />
 		</main>
 		<Footer />
-		<script>
-			if (window.location.hash) {
-				const hash = window.location.hash.substring(1);
-				const observer = new MutationObserver(() => {
-					const el = document.getElementById(hash);
-					if (el) {
-						observer.disconnect();
-						el.scrollIntoView({ behavior: "smooth" });
-					}
-				});
-				observer.observe(document.body, { childList: true, subtree: true });
-			}
-		</script>
 	</body>
 </html>
